@@ -1,9 +1,12 @@
-import Home from "./pages/Home"
+import { BrowserRouter as Router } from "react-router-dom"
+import AppRoutes from "./routes/AppRoutes"
 
 function App(): JSX.Element {
 
   return (
-    <Home />
+    <Router>
+      <AppRoutes />
+    </Router>
   )
 }
 
