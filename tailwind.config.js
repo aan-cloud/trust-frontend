@@ -1,9 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{html,js}"],
+  content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  prefix: "",
   theme: {
-    extend: {},
+    extend: {
+      textStrokeWidth: {
+        1: "1px",
+        2: "2px",
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
+    },
   },
-  plugins: [],
-}
-
+  plugins: [require("@tailwindcss/typography")],
+};
