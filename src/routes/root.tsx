@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import Navigation from "../layouts/navigation";
-import Products from "../layouts/productsGrid";
 
 export async function rootLoader() {
   try {
