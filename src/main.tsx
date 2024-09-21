@@ -1,32 +1,34 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import ErrorPage from './routes/error'
+import "./index.css";
 
-import RootRoute, { rootLoader  } from './routes/root'
+import ErrorPage from "./routes/error";
 
-import HomeRoute, {homeLoader} from './routes/home'
+import RootRoute, { rootLoader } from "./routes/root";
 
-import ProductsRoute from './routes/products'
+import HomeRoute, { homeLoader } from "./routes/home";
+
+import ProductsRoute, { productsLoader } from "./routes/products";
 
 const router = createBrowserRouter([
   {
     id: "root",
     path: "/",
     element: <RootRoute />,
-    //errorElement: <ErrorPage />,
-    //loader: rootLoader,
+    errorElement: <ErrorPage />,
+    loader: rootLoader,
     children: [
       {
         path: "/",
         element: <HomeRoute />,
-        loader: homeLoader
+        loader: homeLoader,
       },
       {
         path: "/:products",
-        element: <ProductsRoute />
-       // loader: productsLoader
+        element: <ProductsRoute />,
+        loader: productsLoader,
       },
       // {
       //   path: "/products/:slug",
@@ -57,12 +59,12 @@ const router = createBrowserRouter([
       //   element: <CartRoute />,
       //   loader: cartLoader,
       // },
-    ]
-  }
+    ],
+  },
 ]);
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
-)
+);
