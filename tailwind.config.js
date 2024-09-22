@@ -10,6 +10,8 @@ export default {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        anton: ["Anton", "sans-serif"],
+        roboto: ["Roboto", "sans-setif"]
       },
     },
   },
