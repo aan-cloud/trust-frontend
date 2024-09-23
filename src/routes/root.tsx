@@ -18,7 +18,7 @@ export async function rootLoader() {
 
 export default function RootRoute() {
   return (
-    <div className="">
+    <div className="bg-[hsl(240,10%,3.9%)] min-h-screen min-w-full absolute -z-[100]">
       <Navigation />
       <Outlet />
     </div>
