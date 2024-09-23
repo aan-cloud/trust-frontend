@@ -28,10 +28,7 @@ export default function HomeRoute() {
 
   return (
     <>
-        <Background />
-        <div>
-          <Products products={products} />
-        </div>
+      <Background />
     </>
   );
 }
