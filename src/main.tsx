@@ -14,6 +14,8 @@ import AllProducts, {allProductsLoader} from "./routes/allProducts";
 
 import ProductsRoute, { productsLoader } from "./routes/products";
 
+import Details, {detailsLoader} from "./routes/detail";
+
 const router = createBrowserRouter([
   {
     id: "root",
@@ -37,6 +39,11 @@ const router = createBrowserRouter([
         element: <ProductsRoute />,
         loader: productsLoader,
       },
+      {
+        path: "/:category/:slug",
+        element: <Details />,
+        loader: detailsLoader
+      }
       // {
       //   path: "/products/:slug",
       //   element: <ProductSlugRoute />,
