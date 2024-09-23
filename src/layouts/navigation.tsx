@@ -1,8 +1,6 @@
 import Logo from "../components/logo";
 import Category from "../components/category";
 import Search from "../components/search";
-import Cart from "../components/cart";
-import User from "../components/user";
 import Button from "../components/button"
 
 export default function Navigation() {
