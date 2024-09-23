@@ -1,6 +1,5 @@
 import { useLoaderData } from "react-router-dom";
 import productsType from "../types/productCard";
-import Products from "../layouts/productsGrid";
 import Background from "../components/background";
 
 export async function homeLoader() {
