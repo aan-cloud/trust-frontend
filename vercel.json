@@ -2,7 +2,7 @@
     "rewrite": [
         {
             "source": "/(.*)",
-            "destination": "https://trustfarhan.vercel.app/"
+            "destination": "/index.html"
         }
     ]
 }
