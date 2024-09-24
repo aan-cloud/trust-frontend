@@ -14,7 +14,7 @@ import AllProducts, {allProductsLoader} from "./routes/allProducts";
 
 import ProductsRoute, { productsLoader } from "./routes/products";
 
-import Details, {detailsLoader} from "./routes/detail";
+import Details, {detailsLoader} from "./routes/details";
 
 const router = createBrowserRouter([
   {
