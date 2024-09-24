@@ -3,8 +3,8 @@ import { useLoaderData } from "react-router-dom";
 import products from "../types/productCard";
 
 export async function allProductsLoader() {
-    try {
-        const response = await fetch(
+  try {
+    const response = await fetch(
       `https://trust-backend-jvcy.onrender.com/products`,
     );
 
@@ -13,15 +13,11 @@ export async function allProductsLoader() {
     }
 
     const products = await response.json();
-    return {products}
-    } catch (error) {
-        
-    }
+    return { products };
+  } catch (error) {}
 }
 
 export default function AllProducts() {
-    const {products} = useLoaderData() as {products: products }
-    return (
-        <Products products={products}/>
-    )
+  const { products } = useLoaderData() as { products: products };
+  return <Products products={products} />;
 }

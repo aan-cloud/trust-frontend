@@ -10,11 +10,11 @@ import RootRoute, { rootLoader } from "./routes/root";
 
 import HomeRoute, { homeLoader } from "./routes/home";
 
-import AllProducts, {allProductsLoader} from "./routes/allProducts";
+import AllProducts, { allProductsLoader } from "./routes/allProducts";
 
 import ProductsRoute, { productsLoader } from "./routes/products";
 
-import Details, {detailsLoader} from "./routes/details";
+import Details, { detailsLoader } from "./routes/details";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <AllProducts/>,
-        loader: allProductsLoader
+        element: <AllProducts />,
+        loader: allProductsLoader,
       },
       {
         path: "/:products",
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
       {
         path: "/:category/:slug",
         element: <Details />,
-        loader: detailsLoader
-      }
+        loader: detailsLoader,
+      },
       // {
       //   path: "/products/:slug",
       //   element: <ProductSlugRoute />,
