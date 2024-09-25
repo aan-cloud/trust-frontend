@@ -2,10 +2,12 @@ import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
 import productsType from "../types/productCard";
 import DetailsLayout from "../layouts/details";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export async function detailsLoader({ params }: LoaderFunctionArgs) {
   try {
     const response = await fetch(
-      `https://trust-backend-jvcy.onrender.com/products/${params.category}/${params.slug}`,
+      `${backendUrl}/products/${params.category}/${params.slug}`,
     );
 
     if (!response.ok) {

@@ -2,10 +2,12 @@ import Products from "../layouts/productsGrid";
 import { useLoaderData } from "react-router-dom";
 import products from "../types/productCard";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export async function allProductsLoader() {
   try {
     const response = await fetch(
-      `https://trust-backend-jvcy.onrender.com/products`,
+      `${backendUrl}/products`,
     );
 
     if (!response.ok) {

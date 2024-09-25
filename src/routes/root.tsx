@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Navigation from "../layouts/navigation";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export async function rootLoader() {
   try {
-    const response = await fetch("https://trust-backend-jvcy.onrender.com");
+    const response = await fetch(backendUrl);
 
     if (!response.ok) {
       throw new Error(`response status: ${response.status}`);

@@ -2,10 +2,12 @@ import { useLoaderData } from "react-router-dom";
 import productsType from "../types/productCard";
 import Background from "../components/background";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export async function homeLoader() {
   try {
     const response = await fetch(
-      "https://trust-backend-jvcy.onrender.com/products",
+      `${backendUrl}/products`,
     );
 
     if (!response.ok) {
