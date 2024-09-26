@@ -3,10 +3,11 @@ import { useState } from "react";
 
 export default function DetailsProduct({ product }: { product: product }) {
   const [quantity, setQuantity] = useState(1);
+  
   return (
     <>
       <div className="w-[60vw] h-[65vh] flex items-center justify-center rounded-md p-6 bg-[hsl(240deg,3.7%,15.9%,50%)]">
-        <img src={product.image_url} className="object-cover" />
+        <img src={product.image_url} className="object-cover scale-75" />
       </div>
       <div className="w-1/2 flex flex-col py-1 gap-5">
         <h3 className="text-white text-4xl font-poppins font-bold break-words">
@@ -21,7 +22,7 @@ export default function DetailsProduct({ product }: { product: product }) {
           </h3>
           <div className="flex bg-transparent gap-4 w-0.5 mb-6">
             <button
-              onClick={() => (quantity < 1 ? {} : setQuantity(quantity - 1))}
+              onClick={() => (quantity < 2 ? {} : setQuantity(quantity - 1))}
               className="py-1 px-4 border-[1px] border-[hsla(0deg,0%,98%,20%)] rounded-md bg-transparent text-white text-lg font-medium"
             >
               -

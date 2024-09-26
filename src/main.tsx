@@ -10,9 +10,9 @@ import RootRoute, { rootLoader } from "./routes/root";
 
 import HomeRoute, { homeLoader } from "./routes/home";
 
-import AllProducts, { allProductsLoader } from "./routes/allProducts";
+import AllProducts, { allProductsLoader } from "./routes/products";
 
-import ProductsRoute, { productsLoader } from "./routes/products";
+import CategoriesRoute, { categoriesLoader } from "./routes/categories";
 
 import Details, { detailsLoader } from "./routes/details";
 
@@ -35,9 +35,9 @@ const router = createBrowserRouter([
         loader: allProductsLoader,
       },
       {
-        path: "/:products",
-        element: <ProductsRoute />,
-        loader: productsLoader,
+        path: "/:category",
+        element: <CategoriesRoute />,
+        loader: categoriesLoader,
       },
       {
         path: "/:category/:slug",
