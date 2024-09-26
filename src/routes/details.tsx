@@ -7,7 +7,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export async function detailsLoader({ params }: LoaderFunctionArgs) {
   try {
     const response = await fetch(
-      `${backendUrl}/products/${params.category}/${params.slug}`,
+      `${backendUrl}/categories/${params.category}/${params.slug}`,
     );
 
     if (!response.ok) {
@@ -23,5 +23,6 @@ export async function detailsLoader({ params }: LoaderFunctionArgs) {
 
 export default function Details() {
   const { products } = useLoaderData() as { products: productsType };
+
   return <DetailsLayout products={products} />;
 }
