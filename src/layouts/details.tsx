@@ -1,4 +1,4 @@
-import productsType from "../types/productCard";
+import productsType, {product} from "../types/productCard";
 import DetailsProduct from "../components/details";
 
 export default function DetailsLayout({
@@ -8,8 +8,8 @@ export default function DetailsLayout({
 }) {
   return (
     <div className="flex justify-between gap-20 px-36 pt-32 pb-16 min-h-screen min-w-0.5">
-      {products.data.map((product) => (
-        <DetailsProduct product={product} />
+      {products.data.map((product: product) => (
+        <DetailsProduct product={product} key={product.id}/>
       ))}
     </div>
   );
