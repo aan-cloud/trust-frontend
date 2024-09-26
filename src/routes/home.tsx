@@ -23,10 +23,6 @@ export async function homeLoader() {
 }
 
 export default function HomeRoute() {
-  const { products } = useLoaderData() as { products: productsType };
-
-  console.log(products);
-
   return (
     <>
       <Background />
