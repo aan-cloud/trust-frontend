@@ -1,4 +1,4 @@
-export default interface categorys {
+export default interface Categories {
   battery: string;
   lamp: string;
   cooler: string;

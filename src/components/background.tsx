@@ -7,12 +7,12 @@ export default function Background() {
         <p className="text-[#B4B4B4] text-7xl font-bold font-poppins mb-3">
           Just believe <span className="underline">trust</span>
         </p>
-        <button className="w-[133px] h-[42px] text-[#EEEEF0] font-poppins text-base font-normal tracking-wide backdrop-blur-md rounded-lg border border-[#B4B4B4]">
+        <button className="w-fit h-[42px] px-6 text-[#EEEEF0] font-poppins text-base font-normal tracking-wide backdrop-blur-md rounded-lg border border-[#B4B4B4]">
           <Link
             to={"/products"}
-            className="w-full h-full flex items-center justify-center"
+            className="w-fit h-full flex items-center justify-center"
           >
-            Explore
+            Explore Products
           </Link>
         </button>
       </div>

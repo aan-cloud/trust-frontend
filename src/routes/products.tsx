@@ -1,14 +1,17 @@
 import Products from "../layouts/productsGrid";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, LoaderFunctionArgs, useSearchParams } from "react-router-dom";
 import products from "../types/productCard";
+import Navigation from "../layouts/navigation";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-export async function allProductsLoader() {
+export async function allProductsLoader({ request }: LoaderFunctionArgs) {
   try {
-    const response = await fetch(
-      `${backendUrl}/products`,
-    );
+    const url = new URL(request.url);
+    const name = url.searchParams.get('name') || '';
+    const query = name ? `?name=${encodeURIComponent(name)}` : '';
+    
+    const response = await fetch(`${backendUrl}/products${query}`);
 
     if (!response.ok) {
       throw new Error(`Error with code: ${response.status}`);
@@ -16,10 +19,32 @@ export async function allProductsLoader() {
 
     const products = await response.json();
     return { products };
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    return { products: null };
+  }
 }
 
 export default function AllProducts() {
-  const { products } = useLoaderData() as { products: products };
-  return <Products products={products} />;
+  const { products } = useLoaderData() as { products: products[] };
+  const [, setSearchParams] = useSearchParams();
+
+  const handleSearch = (searchTerm: string) => {
+    if (searchTerm) {
+      setSearchParams({ name: searchTerm });
+    } else {
+      setSearchParams({});
+    }
+  };
+
+  return (
+    <div className="container mx-auto p-4">
+      <Navigation onSearch={handleSearch} display={"block"}/>
+      {products ? (
+        <Products products={products} />
+      ) : (
+        <p className="text-red-500">Terjadi kesalahan saat memuat produk.</p>
+      )}
+    </div>
+  );
 }
