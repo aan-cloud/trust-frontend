@@ -1,9 +1,9 @@
-import { product } from "../types/productCard";
+import { products } from "../types/productCard";
 import { useState } from "react";
 
-export default function DetailsProduct({ product }: { product: product }) {
+export default function DetailsProduct({ product }: { product: products }) {
   const [quantity, setQuantity] = useState(1);
-  
+
   return (
     <>
       <div className="w-[60vw] h-[65vh] flex items-center justify-center rounded-md p-6 bg-[hsl(240deg,3.7%,15.9%,50%)]">

@@ -1,8 +1,9 @@
+import { products } from "./productCard";
+
 export default interface Categories {
-  battery: string;
-  lamp: string;
-  cooler: string;
-  tire: string;
-  cable: string;
-  brake: string;
+  data: category;
+}
+
+export interface category {
+  products: products[];
 }

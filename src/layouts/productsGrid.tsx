@@ -1,16 +1,15 @@
 import { Card } from "../components/card";
+import Search from "../components/search";
 
-export default function Products({ products }: any) {
+export default function Products({ products, onSearch }: any) {
   return (
-    <>
-      <h1 id="header" className="">
-        All Products
-      </h1>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(190px,1fr))] gap-5 py-20 px-24">
-        {products.data.map((product: any) => (
+    <div className="flex flex-col py-20 items-start px-24 gap-3">
+      <Search onSearch={onSearch} />
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(190px,1fr))] gap-5 py-4">
+        {products.map((product: any) => (
           <Card product={product} key={product.id} />
         ))}
       </div>
-    </>
+    </div>
   );
 }

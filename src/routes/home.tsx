@@ -4,9 +4,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export async function homeLoader() {
   try {
-    const response = await fetch(
-      `${backendUrl}/products`,
-    );
+    const response = await fetch(`${backendUrl}/products`);
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);

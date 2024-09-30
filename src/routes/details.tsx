@@ -1,28 +1,25 @@
 import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
-import productsType from "../types/productCard";
 import DetailsLayout from "../layouts/details";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export async function detailsLoader({ params }: LoaderFunctionArgs) {
   try {
-    const response = await fetch(
-      `${backendUrl}/categories/${params.category}/${params.slug}`,
-    );
+    const response = await fetch(`${backendUrl}/products/${params.slug}`);
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
 
-    const products = await response.json();
-    return { products };
+    const product = await response.json();
+    return { product };
   } catch (error) {
-    return { products: null };
+    return { product: null };
   }
 }
 
 export default function Details() {
-  const { products } = useLoaderData() as { products: productsType };
+  const { product } = useLoaderData() as { product: any };
 
-  return <DetailsLayout products={products} />;
+  return <DetailsLayout product={product.data} />;
 }

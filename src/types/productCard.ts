@@ -1,10 +1,11 @@
 export default interface productsType {
   message: string;
-  data: product[];
-  product: product;
+  data: products[];
+  products: products[];
+  product: products;
 }
 
-export interface product {
+export interface products {
   id: string;
   name: string;
   slug: string;

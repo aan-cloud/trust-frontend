@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import Categories from "../types/categories";
 
-const categories: Categories = {
+const categories: any = {
   battery: "battery",
   lamp: "lamp",
   cooler: "cooler",

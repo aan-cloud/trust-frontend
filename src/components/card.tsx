@@ -3,7 +3,7 @@ import productsType from "../types/productCard";
 
 export const Card: any = ({ product }: productsType) => {
   return (
-    <Link to={`/${product.category}/${product.slug}`}>
+    <Link to={`/products/${product.slug}`}>
       <div
         key={product.id}
         className="text-white bg-[hsl(240deg,3.7%,15.9%,50%)] flex flex-col justify-between items-center gap-2 rounded-sm hover:scale-105 transition-transform duration-300 ease-in-out shadow-sm"

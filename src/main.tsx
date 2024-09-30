@@ -16,6 +16,10 @@ import CategoriesRoute, { categoriesLoader } from "./routes/categories";
 
 import Details, { detailsLoader } from "./routes/details";
 
+import Register from "./routes/register";
+
+import Login from "./routes/login";
+
 const router = createBrowserRouter([
   {
     id: "root",
@@ -40,7 +44,7 @@ const router = createBrowserRouter([
         loader: categoriesLoader,
       },
       {
-        path: "/:category/:slug",
+        path: "products/:slug",
         element: <Details />,
         loader: detailsLoader,
       },
@@ -50,18 +54,18 @@ const router = createBrowserRouter([
       //   loader: productSlugLoader,
       //   action: productSlugAction,
       // },
-      // {
-      //   path: "/register",
-      //   element: <RegisterRoute />,
-      //   loader: registerLoader,
-      //   action: registerAction,
-      // },
-      // {
-      //   path: "/login",
-      //   element: <LoginRoute />,
-      //   loader: loginLoader,
-      //   action: loginAction,
-      // },
+      {
+        path: "/register",
+        element: <Register />,
+        // loader: registerLoader,
+        // action: registerAction,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+        // loader: loginLoader,
+        // action: loginAction,
+      },
       // {
       //   path: "/dashboard",
       //   element: <UserDashboardRoute />,
