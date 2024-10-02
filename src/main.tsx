@@ -20,6 +20,10 @@ import Register from "./routes/register";
 
 import Login from "./routes/login";
 
+import DashboardRoute from "./routes/dashboard";
+
+import CartRoute from "./routes/cartRoute";
+
 const router = createBrowserRouter([
   {
     id: "root",
@@ -48,12 +52,6 @@ const router = createBrowserRouter([
         element: <Details />,
         loader: detailsLoader,
       },
-      // {
-      //   path: "/products/:slug",
-      //   element: <ProductSlugRoute />,
-      //   loader: productSlugLoader,
-      //   action: productSlugAction,
-      // },
       {
         path: "/register",
         element: <Register />,
@@ -66,17 +64,17 @@ const router = createBrowserRouter([
         // loader: loginLoader,
         // action: loginAction,
       },
-      // {
-      //   path: "/dashboard",
-      //   element: <UserDashboardRoute />,
-      //   loader: userDashboardLoader,
-      //   action: userDashboardAction,
-      // },
-      // {
-      //   path: "/cart",
-      //   element: <CartRoute />,
-      //   loader: cartLoader,
-      // },
+      {
+        path: "/dashboard",
+        element: <DashboardRoute />,
+        // loader: userDashboardLoader,
+        // action: userDashboardAction,
+      },
+      {
+        path: "/cart",
+        element: <CartRoute />,
+        // loader: cartLoader,
+      },
     ],
   },
 ]);
