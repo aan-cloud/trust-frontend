@@ -5,6 +5,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import productsType from "../types/productCard";
+import Footer from "../components/footer";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -41,12 +42,15 @@ export default function AllProducts() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <>
+      <div className="container mx-auto p-4">
       {products ? (
         <Products products={products.data} onSearch={handleSearch} />
       ) : (
         <p className="text-red-500">Terjadi kesalahan saat memuat produk.</p>
       )}
     </div>
+    <Footer />
+    </>
   );
 }
