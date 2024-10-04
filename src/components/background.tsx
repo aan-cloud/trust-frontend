@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Background() {
   return (
-    <div className="relative w-full bg-[url('https://ucarecdn.com/08d6eb5b-0793-4cea-89c3-50a65642e698/freepikexport20241004015152nYMc.jpeg')] bg-cover bg-center h-screen')] h-screen flex justify-center">
+    <div className="relative w-full bg-[url('https://ucarecdn.com/08d6eb5b-0793-4cea-89c3-50a65642e698/freepikexport20241004015152nYMc.jpeg')] bg-cover bg-center h-screen')] h-[95vh] flex justify-center">
       <div className="relative z-10 flex items-center w-fit flex-col justify-center gap-3 h-full">
         <h1 className="text-[rgb(255,255,255)] text-7xl font-bold font-poppins mb-3">
           Just believe <span className="underline">trust</span>
