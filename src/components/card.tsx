@@ -9,7 +9,7 @@ export const Card: any = ({ product }: productsType) => {
         className="text-white bg-[hsl(240deg,3.7%,15.9%,50%)] flex flex-col justify-between items-center gap-2 rounded-sm hover:scale-105 transition-transform duration-300 ease-in-out shadow-sm"
       >
         <div className="w-full h-40 bg-[#606060] rounded-lg flex items-center px-8 py-3 justify-center rounded-b-none">
-          <img src={product.image_url} className="object-cover" />
+          <img src={product.imageUrl} className="object-cover" />
         </div>
         <div className="flex flex-col pb-4 pl-4 pr-4 justify-start w-full">
           <h4 className="font-light font-poppins mt-2 text-sm">
