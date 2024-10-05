@@ -7,7 +7,7 @@ export default function DetailsProduct({ product }: { product: products }) {
   return (
     <>
       <div className="w-[60vw] h-[65vh] flex items-center justify-center rounded-md p-6 bg-[hsl(240deg,3.7%,15.9%,50%)]">
-        <img src={product.image_url} className="object-cover scale-75" />
+        <img src={product.imageUrl} className="object-cover scale-75" />
       </div>
       <div className="w-1/2 flex flex-col py-1 gap-5">
         <h3 className="text-white text-4xl font-poppins font-bold break-words">
