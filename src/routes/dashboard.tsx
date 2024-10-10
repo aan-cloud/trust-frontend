@@ -1,6 +1,21 @@
-import { Form } from "react-router-dom";
+import { Form, redirect, useLoaderData } from "react-router-dom";
+import { auth } from "../libs/auth";
+
+export async function loader () {
+  const user = await auth.checkUser();
+  
+  if(!user) return redirect("login");
+
+  return { user }
+}
 
 export default function DashboardRoute() {
+  const data = useLoaderData() as Awaited<ReturnType<typeof loader>>;
+
+  console.log('Loader data:', data);
+
+  if (data instanceof Response) return null;
+
   return (
     <div className="py-28 w-screen">
       <div className="max-w-md mx-auto p-6 rounded-lg shadow-md">
@@ -13,7 +28,7 @@ export default function DashboardRoute() {
             className="block text-sm font-medium text-gray-200 mb-1"
             htmlFor="fullName"
           >
-            User Name
+            Username
           </label>
           <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 bg-white">
             <svg
@@ -31,7 +46,7 @@ export default function DashboardRoute() {
             <input
               type="text"
               id="fullName"
-              value="User "
+              value={data.user.user.username}
               readOnly
               className="w-full outline-none text-gray-700"
             />
@@ -43,7 +58,7 @@ export default function DashboardRoute() {
             className="block text-sm font-medium text-gray-200 mb-1"
             htmlFor="email"
           >
-            Email address
+            Email
           </label>
           <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 bg-white">
             <svg
@@ -57,13 +72,13 @@ export default function DashboardRoute() {
             <input
               type="email"
               id="email"
-              value="User@gmail.com"
+              value={data.user.user.email}
               readOnly
               className="w-full outline-none text-gray-700"
             />
           </div>
         </div>
-        <Form>
+        <Form method="post">
             <button
             type="submit"
             className="w-full py-2 bg-white mt-4 text-black rounded-md font-medium"
@@ -74,4 +89,9 @@ export default function DashboardRoute() {
       </div>
     </div>
   );
-}
+};
+
+export function action() {
+  auth.logout();
+  return redirect("/login")
+};
