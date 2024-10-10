@@ -1,4 +1,12 @@
-import { Form } from "react-router-dom";
+import { Form, redirect, ActionFunctionArgs } from "react-router-dom";
+import { auth } from "../libs/auth";
+
+export async function loader() {
+  const user = await auth.checkUser();
+
+  if(user) return redirect("/dashbord");
+  return null
+};
 
 export default function Register() {
   return (
@@ -52,4 +60,19 @@ export default function Register() {
       </div>
     </main>
   );
-}
+};
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+
+  const userRegister = {
+    username: String(formData.get("username")),
+    email: String(formData.get("email")),
+    password: String(formData.get("password")),
+  };
+
+  const result = auth.register(userRegister);
+  if (!result) return null;
+
+  return redirect("/login");
+};

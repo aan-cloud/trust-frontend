@@ -1,4 +1,14 @@
-import { Form } from "react-router-dom";
+import { Form, redirect, ActionFunctionArgs } from "react-router-dom";
+import { auth } from "../libs/auth";
+
+
+export async function loader() {
+  const user = await auth.checkUser();
+  if (user) return redirect("/dashboard");
+  return null;
+};
+
+
 export default function Login() {
   return (
     <main className="w-screen h-screen flex justify-center items-center">
@@ -10,12 +20,12 @@ export default function Login() {
           className="w-full space-y-2 flex flex-col gap-3 font-extralight"
         >
           <div className="flex flex-col gap-[2px]">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
-              id="username"
+              id="email"
               className="bg-transparent px-1 border border-[hsla(0deg,0%,98%,30%)] rounded-md py-[4px]"
               type="text"
-              name="username"
+              name="email"
               required
             />
           </div>
@@ -39,4 +49,18 @@ export default function Login() {
       </div>
     </main>
   );
-}
+};
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+
+  const userLogin = {
+    email: String(formData.get("email")),
+    password: String(formData.get("password")),
+  };
+
+  const result = await auth.login(userLogin);
+  if (!result) return null;
+
+  return redirect("/dashboard");
+};

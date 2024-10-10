@@ -1,28 +1,31 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
+
+import { auth } from "../libs/auth";
 import Navigation from "../layouts/navigation";
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
 export async function rootLoader() {
-  try {
-    const response = await fetch(backendUrl);
+  const user = await auth.checkUser();
 
-    if (!response.ok) {
-      throw new Error(`response status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error: any | unknown) {
-    return `Error ${error.message}`;
+  if (!auth.isAuthenticated) {
+    await auth.checkUser();
   }
+
+  return {
+    isAuthenticated: auth.isAuthenticated,
+    user: user,
+  };
 }
 
 export default function RootRoute() {
+  const { isAuthenticated, user } = useLoaderData() as Awaited<ReturnType<typeof rootLoader>>;
+
   return (
-    <div className="bg-[hsl(240,10%,3.9%)] min-h-screen min-w-full absolute -z-[100]">
-      <Navigation />
-      <Outlet />
-    </div>
+    <CookiesProvider defaultSetOptions={{ path: "/" }}>
+      <div className="bg-[hsl(240,10%,3.9%)] min-h-screen min-w-full absolute -z-[100]">
+        <Navigation isAuthenticated={isAuthenticated} user={user}/>
+        <Outlet />
+      </div>
+    </CookiesProvider>
   );
 }
