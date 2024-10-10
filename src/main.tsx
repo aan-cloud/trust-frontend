@@ -16,11 +16,11 @@ import CategoriesRoute, { categoriesLoader } from "./routes/categories";
 
 import Details, { detailsLoader } from "./routes/details";
 
-import Register from "./routes/register";
+import Register, {loader as registerLoader, action as registerAction} from "./routes/register";
 
-import Login from "./routes/login";
+import Login, { loader as loginLoader, action as loginAction} from "./routes/login";
 
-import DashboardRoute from "./routes/dashboard";
+import DashboardRoute, {loader as userDashboardLoader, action as userDashboardAction} from "./routes/dashboard";
 
 import CartRoute from "./routes/cartRoute";
 
@@ -55,20 +55,20 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
-        // loader: registerLoader,
-        // action: registerAction,
+        loader: registerLoader,
+        action: registerAction,
       },
       {
         path: "/login",
         element: <Login />,
-        // loader: loginLoader,
-        // action: loginAction,
+        loader: loginLoader,
+        action: loginAction,
       },
       {
         path: "/dashboard",
         element: <DashboardRoute />,
-        // loader: userDashboardLoader,
-        // action: userDashboardAction,
+        loader: userDashboardLoader,
+        action: userDashboardAction,
       },
       {
         path: "/cart",
