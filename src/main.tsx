@@ -14,7 +14,7 @@ import AllProducts, { allProductsLoader } from "./routes/products";
 
 import CategoriesRoute, { categoriesLoader } from "./routes/categories";
 
-import Details, { detailsLoader } from "./routes/details";
+import Details, { detailsLoader, action as detailAction } from "./routes/details";
 
 import Register, {loader as registerLoader, action as registerAction} from "./routes/register";
 
@@ -22,7 +22,7 @@ import Login, { loader as loginLoader, action as loginAction} from "./routes/log
 
 import DashboardRoute, {loader as userDashboardLoader, action as userDashboardAction} from "./routes/dashboard";
 
-import CartRoute from "./routes/cartRoute";
+import CartRoute, {loader as cartLoader} from "./routes/cartRoute";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +51,7 @@ const router = createBrowserRouter([
         path: "products/:slug",
         element: <Details />,
         loader: detailsLoader,
+        action: detailAction
       },
       {
         path: "/register",
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <CartRoute />,
-        // loader: cartLoader,
+        loader: cartLoader,
       },
     ],
   },
