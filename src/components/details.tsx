@@ -1,8 +1,7 @@
 import { products } from "../types/productCard";
-import { useState } from "react";
+import { Form } from "react-router-dom";
 
 export default function DetailsProduct({ product }: { product: products }) {
-  const [quantity, setQuantity] = useState(1);
 
   return (
     <>
@@ -20,28 +19,22 @@ export default function DetailsProduct({ product }: { product: products }) {
           <h3 className="text-white text-base font-poppins font-extralight">
             QUANTITY
           </h3>
+          <Form method="post" className="w-full">
+          <input type="hidden" name="productId" defaultValue={product.id} />
           <div className="flex bg-transparent gap-4 w-0.5 mb-6">
-            <button
-              onClick={() => (quantity < 2 ? {} : setQuantity(quantity - 1))}
-              className="py-1 px-4 border-[1px] border-[hsla(0deg,0%,98%,20%)] rounded-md bg-transparent text-white text-lg font-medium"
-            >
-              -
-            </button>
             <input
-              type="text"
-              value={quantity}
-              className="border border-[hsla(0deg,0%,98%,20%)] rounded-md bg-transparent w-12 text-white text-lg font-normal text-center"
+              type="number"
+              name="quantity"
+              defaultValue={1}
+              min={1}
+              required
+              className="border border-[hsla(0deg,0%,98%,20%)] rounded-md bg-transparent w-16 text-white text-lg font-normal py-1 px-3"
             />
-            <button
-              onClick={() => setQuantity(quantity + 1)}
-              className="py-1 px-4 border-[1px] border-[hsla(0deg,0%,98%,20%)] rounded-md text-white text-lg font-medium"
-            >
-              +
-            </button>
           </div>
-          <button className="p-3 border border-[hsla(0deg,0%,98%,60%)] rounded-sm text-base text-white font-medium">
+          <button className="w-full p-3 border border-[hsla(0deg,0%,98%,60%)] rounded-sm text-base text-white font-medium">
             Add to Cart
           </button>
+          </Form>
         </div>
       </div>
     </>
