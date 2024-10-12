@@ -47,7 +47,7 @@ export const Cart: React.FC<CartTypes> = ({ id, items, total }) => {
                     <small className="text-gray-100 font-poppins font-normal text-base">{total}</small>
                 </div>
                 <button className="px-7 py-3 bg-white text-black rounded-xl">
-                    <a href={`https://api.whatsapp.com/send/?phone=60177671526&text=${encodedMessage}type=phone_number&app_absent=0`} className="font-semibold block w-full h-full">Checkout</a>
+                    <a href={`https://api.whatsapp.com/send/?phone=60177671526&text=${encodedMessage}&app_absent=0`} className="font-semibold block w-full h-full">Checkout</a>
                 </button>
             </div>
         </>
