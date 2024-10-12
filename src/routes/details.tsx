@@ -29,7 +29,7 @@ export async function action({ request }: LoaderFunctionArgs) {
   const token = await accessToken.get();
 
   if (!token) {
-    return null
+    return redirect("/login")
   };
 
   const formdData = await request.formData();
