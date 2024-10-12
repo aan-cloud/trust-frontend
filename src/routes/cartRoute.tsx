@@ -24,7 +24,7 @@ export default function CartRoute() {
     const { cart } = useLoaderData()as {cart: CartTypes}
 
     return (
-        <div className="py-32 px-44 h-screen w-screen flex items-baseline justify-between">
+        <div className="py-32 px-44 min-h-screen w-screen flex items-baseline justify-between">
             <Cart {...cart}/>
         </div>
     );
