@@ -14,4 +14,6 @@ export interface products {
   category: string;
   stock: string;
   price: number;
+  categoryId: string
+  createdAt: string
 }
