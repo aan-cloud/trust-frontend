@@ -6,13 +6,18 @@ import {
   Scripts,
   Link,
   ScrollRestoration,
-  MetaFunction,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
-import { optionMenu } from "./data";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 
-import "./tailwind.css";
+import styles from "./tailwind.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -21,10 +26,7 @@ export const links: LinksFunction = () => [
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
   },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
+  { rel: "stylesheet", href: styles },
   {
     rel: "apple-touch-icon",
     sizes: "180x180",
@@ -166,15 +168,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
             className="px-28 text-[#3C3D37] font-semibold py-3 flex justify-between items-center"
             id="downside"
           >
-            <select
-              className="min-w-56 rounded-md bg-orange-600 px-2 pr-4 py-3 text-[#fff]"
-              name="Category"
-              id="category"
-            >
-              <option value="all-category">All Category</option>
-              <option value="Tire">Tire</option>
-              <option value="Engine">Engine</option>
-            </select>
+            <Select>
+              <SelectTrigger
+                className="w-[20%] bg-chart-1 text-white h-full
+  "
+              >
+                <SelectValue placeholder="Theme" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="tire">Tire</SelectItem>
+                <SelectItem value="engine">Engine</SelectItem>
+                <SelectItem value="lamp">Lamp</SelectItem>
+              </SelectContent>
+            </Select>
             <ul className="flex justify-between items-center gap-7">
               <Link to={""}>
                 <li className="px-2 py-1 hover:bg-[#CCD3CA] rounded-sm">

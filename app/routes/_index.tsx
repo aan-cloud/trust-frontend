@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { carCategries, images, products } from "~/data";
 
-import ProductCatalog from "~/component/productCatalogs";
+import ProductCatalog from "~/components/ui/productCatalogs";
 
 export const meta: MetaFunction = () => {
   return [
