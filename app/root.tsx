@@ -174,7 +174,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <SelectTrigger
                 className="w-[20%] bg-chart-1 text-white h-full font-semibold text-lg"
               >
-                <SelectValue placeholder="Theme" />
+                <SelectValue placeholder="Categories" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="tire">Tire</SelectItem>
