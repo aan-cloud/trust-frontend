@@ -73,6 +73,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               id="logo"
               className="w-[200px] h-[54px] flex justify-center items-center"
             >
+              <img width="60" height="60" src="https://img.icons8.com/wired/64/FD7E14/car.png" alt="car"/>
               <Link className="flex justify-start items-center w-full h-full text-5xl font-bungee text-chart-1 " to={""}>
                 TRUST
               </Link>
