@@ -26,6 +26,10 @@ export const links: LinksFunction = () => [
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
   },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+  },
   { rel: "stylesheet", href: styles },
   {
     rel: "apple-touch-icon",
@@ -69,11 +73,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
               id="logo"
               className="w-[200px] h-[54px] flex justify-center items-center"
             >
-              <Link to={""}>
-                <img
-                  className="scale-90 object-cover"
-                  src="https://ucarecdn.com/501c2dd8-c4ff-43ae-b753-5e663686c5ca/-/preview/300x80/"
-                />
+              <Link className="flex justify-start items-center w-full h-full text-5xl font-bungee text-chart-1 " to={""}>
+                TRUST
               </Link>
             </div>
             <div
@@ -170,8 +171,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             <Select>
               <SelectTrigger
-                className="w-[20%] bg-chart-1 text-white h-full
-  "
+                className="w-[20%] bg-chart-1 text-white h-full font-semibold text-lg"
               >
                 <SelectValue placeholder="Theme" />
               </SelectTrigger>
