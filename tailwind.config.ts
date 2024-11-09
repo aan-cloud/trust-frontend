@@ -64,6 +64,10 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        theme: {
+          "1": "#f53d00",
+          "2": "#f53900"
+        }
       },
     },
   },

@@ -73,8 +73,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
               id="logo"
               className="w-[200px] h-[54px] flex justify-center items-center"
             >
-              <img width="60" height="60" src="https://img.icons8.com/wired/64/FD7E14/car.png" alt="car"/>
-              <Link className="flex justify-start items-center w-full h-full text-5xl font-bungee text-chart-1 " to={""}>
+              <img width="64" height="64" src="https://img.icons8.com/hatch/64/FD7E14/car.png" alt="car"/>
+              <Link className="flex justify-start items-center w-full h-full text-5xl font-bungee text-theme-1 " to={""}>
                 TRUST
               </Link>
             </div>
@@ -90,11 +90,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 id="search-from"
               >
                 <input
-                  className="w-full bg-transparent border-none outline-none text-black placeholder:text-[#5e5e5e]"
+                  className="w-full bg-transparent border-none outline-none text-black placeholder:text-[#5e5e5e] placeholder:font-medium"
                   id="q"
                   aria-label="Search contacts"
                   //defaultValue={ q || "" }
-                  placeholder="Search products"
+                  placeholder="Search Products"
                   type="search"
                   //className={searching ? "loading" : ""}
                   name="q"
@@ -172,7 +172,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             <Select>
               <SelectTrigger
-                className="w-[20%] bg-chart-1 text-white h-full font-semibold text-lg"
+                className="w-[20%] bg-theme-2 text-white h-full font-semibold text-lg"
               >
                 <SelectValue placeholder="Categories" />
               </SelectTrigger>

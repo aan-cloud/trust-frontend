@@ -4,8 +4,10 @@ import { Link } from "@remix-run/react";
 import { useState } from "react";
 
 import { carCategries, images, products } from "~/data";
+import Information from "~/shared/information";
+import Footer from "~/shared/footer";
 
-import ProductCatalog from "~/components/ui/productCatalogs";
+import ProductCatalog from "~/shared/productCatalogs";
 
 export const meta: MetaFunction = () => {
   return [
@@ -81,7 +83,7 @@ export default function Index() {
             </svg>
           </button>
         </div>
-        <div className="grid grid-cols-6 mt-10" id="car-category">
+        <div className="grid grid-cols-4 mt-10" id="car-category">
           {carCategries.map((car) => (
             <Link to={""}>
               <div className="pb-2 border flex flex-col items-center">
@@ -93,6 +95,8 @@ export default function Index() {
         </div>
       </div>
       <ProductCatalog products={products} />
+      <Information />
+      <Footer />
     </>
   );
 }
