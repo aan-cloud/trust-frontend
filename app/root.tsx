@@ -6,6 +6,7 @@ import {
   Scripts,
   Link,
   ScrollRestoration,
+  NavLink,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
@@ -28,7 +29,7 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+    href: "https://fonts.googleapis.com/css2?family=Bungee&family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap",
   },
   { rel: "stylesheet", href: styles },
   {
@@ -64,18 +65,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="bg-[#f0f0f0]">
-        <nav className="pt-4 pb-2 flex flex-col bg-white">
+        <nav className="pt-2 flex flex-col bg-white">
           <div
             id="upside"
-            className="px-28 flex justify-between items-center py-2 border-b"
+            className="px-28 flex justify-between items-center py-2"
           >
             <div
               id="logo"
               className="w-[200px] h-[54px] flex justify-center items-center"
             >
-              <img width="64" height="64" src="https://img.icons8.com/hatch/64/FD7E14/car.png" alt="car"/>
-              <Link className="flex justify-start items-center w-full h-full text-5xl font-bungee text-theme-1 " to={""}>
-                TRUST
+              <Link
+                className="flex justify-start items-center w-full h-ful"
+                to={""}
+              >
+                <h1 className="text-5xl font-hubot font-bold text-theme-1 ">
+                  TR
+                </h1>
+                <img
+                  width="50"
+                  height="50"
+                  src="https://img.icons8.com/hatch/64/FD7E14/car.png"
+                  alt="car"
+                />
+                <h1 className="text-5xl font-hubot font-bold text-theme-1 ">
+                  ST
+                </h1>
               </Link>
             </div>
             <div
@@ -83,14 +97,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
               id="search"
             >
               <Form
-                className="w-full h-11 px-4 items-center gap-2
-             rounded-xl bg-[#d4d4d4] flex justify-between font-normal"
+                className="w-full h-9 px-4 items-center gap-2 max-h-[40px]
+             rounded-md bg-[#d4d4d4] flex justify-between font-normal focus-within:ring-2 focus-within:ring-orange-500"
                 method="post"
                 role="search"
                 id="search-from"
               >
                 <input
-                  className="w-full bg-transparent border-none outline-none text-black placeholder:text-[#5e5e5e] placeholder:font-medium"
+                  className="w-full bg-transparent border-none outline-none text-black placeholder:text-[#5e5e5e] placeholder:font-medium focus:outline-none"
                   id="q"
                   aria-label="Search contacts"
                   //defaultValue={ q || "" }
@@ -115,7 +129,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </svg>
               </Form>
             </div>
-            <div className="flex justify-center gap-2 text-black" id="feat">
+            <div className="flex justify-center gap-5 text-black" id="feat">
               <Link to={""} className="text-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +137,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-7"
                 >
                   <path
                     strokeLinecap="round"
@@ -139,7 +153,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-7"
                 >
                   <path
                     strokeLinecap="round"
@@ -155,7 +169,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-7"
                 >
                   <path
                     strokeLinecap="round"
@@ -167,38 +181,75 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           <div
-            className="px-28 text-[#3C3D37] font-semibold py-3 flex justify-between items-center"
+            className="px-28 text-[#3C3D37] font-semibold py-2 border-t flex justify-between items-center"
             id="downside"
           >
             <Select>
-              <SelectTrigger
-                className="w-[20%] bg-theme-2 text-white h-full font-semibold text-lg"
-              >
+              <SelectTrigger className="py-1 w-[17%] bg-theme-1 text-white h-full font-semibold text-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5"
+                  />
+                </svg>
                 <SelectValue placeholder="Categories" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="tire">Tire</SelectItem>
-                <SelectItem value="engine">Engine</SelectItem>
-                <SelectItem value="lamp">Lamp</SelectItem>
+                <SelectItem className="font-semibold text-base" value="tire">
+                  Tire
+                </SelectItem>
+                <SelectItem className="font-semibold text-base" value="engine">
+                  Engine
+                </SelectItem>
+                <SelectItem className="font-semibold text-base" value="lamp">
+                  Lamp
+                </SelectItem>
               </SelectContent>
             </Select>
-            <ul className="flex justify-between items-center gap-7">
-              <Link to={""}>
-                <li className="px-2 py-1 hover:bg-[#CCD3CA] rounded-sm">
+            <ul className="flex justify-between items-center gap-7 border-l pl-12">
+              <li className="px-2 py-[1px] hover:bg-[#CCD3CA] rounded-sm">
+                <NavLink
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                  to={"/"}
+                >
                   Home
-                </li>
-              </Link>
-              <li className="px-2 py-1 hover:bg-[#CCD3CA] rounded-sm">
-                E-warranty
+                </NavLink>
               </li>
-              <li className="px-2 py-1 hover:bg-[#CCD3CA] rounded-sm">
+              <li className="px-2 py-[1px] hover:bg-[#CCD3CA] rounded-sm">
                 About Us
               </li>
-              <li className="px-2 py-1 hover:bg-[#CCD3CA] rounded-sm">
+              <li className="px-2 py-[1px] hover:bg-[#CCD3CA] rounded-sm">
                 Contact US
               </li>
-              <li className="px-2 py-1 hover:bg-[#CCD3CA] rounded-sm">
-                Login/Register
+              <li className="px-2 py-[1px] hover:bg-[#CCD3CA] rounded-sm">
+                <NavLink
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                  to={"/register"}
+                >
+                  Register
+                </NavLink>
+              </li>
+              <li className="px-2 py-[1px] hover:bg-[#CCD3CA] rounded-sm">
+                <NavLink
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                  to={"/login"}
+                >
+                  Login
+                </NavLink>
               </li>
             </ul>
             <div

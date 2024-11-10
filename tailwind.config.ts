@@ -16,7 +16,10 @@ export default {
           "Segoe UI Symbol",
           "Noto Color Emoji",
         ],
-		bungee: ["Bungee", "sans-serif"]
+        bungee: ["Bungee", "sans-serif"],
+        montserrat: ["Montserrat"],
+        Playfair: ["Playfair Display SC"],
+        hubot: ["Hubot Sans"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -66,8 +69,8 @@ export default {
         },
         theme: {
           "1": "#f53d00",
-          "2": "#f53900"
-        }
+          "2": "#f53900",
+        },
       },
     },
   },

@@ -195,23 +195,31 @@ export const products = [
 
 export const info = [
   {
-    description: "Top-notch aftermarket car spare parts supplied from only the industry’s leading manufacturers. ",
-    imgSrc: "https://ucarecdn.com/664c6334-8d8f-4725-a00e-3eb789c3deae/highqualitypartsicon.webp",
-    title: "High Quality Parts"
+    description:
+      "Top-notch aftermarket car spare parts supplied from only the industry’s leading manufacturers. ",
+    imgSrc:
+      "https://ucarecdn.com/664c6334-8d8f-4725-a00e-3eb789c3deae/highqualitypartsicon.webp",
+    title: "High Quality Parts",
   },
   {
-    description: "We offer over 2500000 OEM-style quality auto parts to cover all your repair needs. ",
-    imgSrc: "https://ucarecdn.com/a1c5923a-7284-4a79-9c57-6eb4a33b701a/wideproductrangeicon.webp",
-    title: "Wide Product Range"
+    description:
+      "We offer over 2500000 OEM-style quality auto parts to cover all your repair needs. ",
+    imgSrc:
+      "https://ucarecdn.com/a1c5923a-7284-4a79-9c57-6eb4a33b701a/wideproductrangeicon.webp",
+    title: "Wide Product Range",
   },
   {
-    description: "Feel confident when buying from Remco as our parts are all backed with a min. of 1-year warranty. ",
-    imgSrc: "https://ucarecdn.com/431f76a3-b7b0-4b1b-bc83-b32bd7a265c9/warranty.webp",
-    title: "1 Year Warranty"
+    description:
+      "Feel confident when buying from Remco as our parts are all backed with a min. of 1-year warranty. ",
+    imgSrc:
+      "https://ucarecdn.com/431f76a3-b7b0-4b1b-bc83-b32bd7a265c9/warranty.webp",
+    title: "1 Year Warranty",
   },
   {
-    description: "We use advanced encryption to keep your payment and personal data safe and secure.",
-    imgSrc: "https://ucarecdn.com/a42fe90a-0fc4-46fa-980e-2ee10de21501/securepaymenticon.webp",
-    title: "Safe & Secure Payment"
+    description:
+      "We use advanced encryption to keep your payment and personal data safe and secure.",
+    imgSrc:
+      "https://ucarecdn.com/a42fe90a-0fc4-46fa-980e-2ee10de21501/securepaymenticon.webp",
+    title: "Safe & Secure Payment",
   },
-]
+];

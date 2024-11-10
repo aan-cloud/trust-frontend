@@ -12,6 +12,7 @@
     "prettier": "bunx prettier --write ."
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@remix-run/node": "^2.13.1",
