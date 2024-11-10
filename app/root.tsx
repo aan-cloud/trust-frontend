@@ -98,7 +98,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             >
               <Form
                 className="w-full h-9 px-4 items-center gap-2 max-h-[40px]
-             rounded-md bg-[#d4d4d4] flex justify-between font-normal focus-within:ring-2 focus-within:ring-orange-500"
+             rounded-md bg-[#d4d4d4] flex justify-between font-normal focus-within:ring-2 focus-within:ring-theme-1"
                 method="post"
                 role="search"
                 id="search-from"

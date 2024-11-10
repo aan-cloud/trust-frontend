@@ -26,7 +26,7 @@ export default function Index() {
   };
   return (
     <>
-      <div className="px-28 py-10" id="main">
+      <div className="px-28 py-10 shadow-inner" id="main">
         <div
           className="relative w-full mx-w-4xl  mx-auto overflow-hidden"
           id="picture"
