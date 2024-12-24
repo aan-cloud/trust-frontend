@@ -1,0 +1,8 @@
+[build.environment]
+NODE_VERSION = "22"
+
+[build]
+command = "curl -fsSL https://bun.sh/install | bash && bun run build"
+command = "bun run build"
+publish = "build/client"
+
