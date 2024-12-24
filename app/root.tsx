@@ -11,7 +11,7 @@ import appStylesHref from "./app.css?url";
 export default function App() {
   return (
     <>
-      <div id="sidebar">
+      {/* <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
           <Form id="search-form" role="search">
@@ -38,7 +38,8 @@ export default function App() {
             </li>
           </ul>
         </nav>
-      </div>
+      </div> */}
+      <h1 className="">Nama saya farhan</h1>
     </>
   );
 }
