@@ -6,6 +6,11 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { searchSchema } from "@/schema/search";
 import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { navigations } from "../../../data";
+
 
 export const Header = () => {
   const form = useForm<z.infer<typeof searchSchema>>({
@@ -19,22 +24,13 @@ export const Header = () => {
     console.log(values);
   }
 
+
   return (
     <header className="sticky top-0 bg-white bg-opacity-30 backdrop-blur-sm transition-all duration-300 shadow-sm z-10 px-24 p-4 flex justify-between items-center mb-7">
-      <h1 className="font-sans text-4xl font-black uppercase text-primary">
+      <Link href={"/"} className="font-sans text-4xl font-black uppercase text-primary">
         trust.
-      </h1>
-      <ul className="flex justify-between gap-2 text-sm font-light font-sans">
-        <li className="hover:bg-primary rounded-sm hover:text-white py-2 px-3">
-          Product
-        </li>
-        <li className="hover:bg-primary rounded-sm hover:text-white py-2 px-3">
-          Seller
-        </li>
-        <li className="hover:bg-primary rounded-sm hover:text-white py-2 px-3">
-          Menu
-        </li>
-      </ul>
+      </Link>
+      <NavLinks />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -116,3 +112,24 @@ export const Header = () => {
     </header>
   );
 };
+
+const NavLinks = () => {
+  const pathName = usePathname();
+
+  return (
+    <div className="flex gap-2">
+      {
+        navigations.map((link) => (
+          <Link key={link.name} href={link.href} className={clsx(
+            "hover:bg-primary rounded-sm hover:text-white py-2 px-2 font-poppins",
+            {
+              "bg-primary text-white" : pathName === link.href
+            }
+          )}>
+            {link.name}
+          </Link>
+        ))
+      }
+    </div>
+  )
+}
