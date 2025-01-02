@@ -1,5 +1,5 @@
-"use client";
-import Link from "next/link";
+'use client';
+import Link from 'next/link';
 import {
   Form,
   FormControl,
@@ -7,13 +7,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { UseFormReturn } from "react-hook-form";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { UseFormReturn } from 'react-hook-form';
 
-import { z } from "zod";
-import { registerSchema } from "@/schema/register";
+import { z } from 'zod';
+import { registerSchema } from '@/schema/register';
 
 interface RegisterPageProps {
   form: UseFormReturn<z.infer<typeof registerSchema>>;
@@ -42,7 +42,10 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field}></Input>
+                    <Input
+                      placeholder="shadcn"
+                      {...field}
+                    ></Input>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -55,7 +58,10 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field}></Input>
+                    <Input
+                      placeholder="shadcn"
+                      {...field}
+                    ></Input>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -80,11 +86,17 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
             />
             <div>
               <small>You already have an account? </small>
-              <Link href={"/login"} className="text-sm text-blue-800 underline">
+              <Link
+                href={'/login'}
+                className="text-sm text-blue-800 underline"
+              >
                 Login
               </Link>
             </div>
-            <Button type="submit" className="bg-primary">
+            <Button
+              type="submit"
+              className="bg-primary"
+            >
               Submit
             </Button>
           </form>

@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const imageSchema = z.object({
-  id:z.string(),
-  imageUrl:z.string(),
-  productId:z.string(),
+  id: z.string(),
+  imageUrl: z.string(),
+  productId: z.string(),
 });
 
 export const dataSchema = z.object({

@@ -1,22 +1,21 @@
-"use client";
-import { Button } from "../ui/button";
-import { Form, FormControl, FormField, FormItem } from "../ui/form";
-import { Input } from "../ui/input";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { searchSchema } from "@/schema/search";
-import { zodResolver } from "@hookform/resolvers/zod";
-import clsx from "clsx";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { navigations } from "../../../data";
-
+'use client';
+import { Button } from '../ui/button';
+import { Form, FormControl, FormField, FormItem } from '../ui/form';
+import { Input } from '../ui/input';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { searchSchema } from '@/schema/search';
+import { zodResolver } from '@hookform/resolvers/zod';
+import clsx from 'clsx';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { navigations } from '../../../data';
 
 export const Header = () => {
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
-      value: "",
+      value: '',
     },
   });
 
@@ -24,10 +23,12 @@ export const Header = () => {
     console.log(values);
   }
 
-
   return (
     <header className="sticky top-0 bg-white bg-opacity-30 backdrop-blur-sm transition-all duration-300 shadow-sm z-10 px-24 p-4 flex justify-between items-center mb-7">
-      <Link href={"/"} className="font-sans text-4xl font-black uppercase text-primary">
+      <Link
+        href={'/'}
+        className="font-sans text-4xl font-black uppercase text-primary"
+      >
         trust.
       </Link>
       <NavLinks />
@@ -42,7 +43,10 @@ export const Header = () => {
             render={({ field }) => (
               <FormItem className="flex-grow">
                 <FormControl>
-                  <Input placeholder="Search" {...field}></Input>
+                  <Input
+                    placeholder="Search"
+                    {...field}
+                  ></Input>
                 </FormControl>
               </FormItem>
             )}
@@ -65,7 +69,10 @@ export const Header = () => {
           </Button>
         </form>
       </Form>
-      <div className="flex gap-4 ml-28" id="logo">
+      <div
+        className="flex gap-4 ml-28"
+        id="logo"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -118,18 +125,20 @@ const NavLinks = () => {
 
   return (
     <div className="flex gap-2">
-      {
-        navigations.map((link) => (
-          <Link key={link.name} href={link.href} className={clsx(
-            "hover:bg-primary rounded-sm hover:text-white py-2 px-2 font-poppins",
+      {navigations.map((link) => (
+        <Link
+          key={link.name}
+          href={link.href}
+          className={clsx(
+            'hover:bg-primary rounded-sm hover:text-white py-2 px-2 font-poppins',
             {
-              "bg-primary text-white" : pathName === link.href
+              'bg-primary text-white': pathName === link.href,
             }
-          )}>
-            {link.name}
-          </Link>
-        ))
-      }
+          )}
+        >
+          {link.name}
+        </Link>
+      ))}
     </div>
-  )
-}
+  );
+};

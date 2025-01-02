@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import Image from "next/image";
-import { dataSchema } from "@/schema/data";
-import { useState } from "react";
-import { useEffect } from "react";
+import Image from 'next/image';
+import { dataSchema } from '@/schema/data';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { z } from "zod";
-import 'dotenv/config'
+import { Card, CardContent, CardHeader } from '../ui/card';
+import { z } from 'zod';
+import 'dotenv/config';
 
 export const HomePage = () => {
   const [data, setData] = useState([]);
@@ -16,24 +16,24 @@ export const HomePage = () => {
   useEffect(() => {
     async function fetchData() {
       const url = `${process.env.NEXT_PUBLIC_API_URL}/products`;
-    try {
-      const response = await fetch(url);
+      try {
+        const response = await fetch(url);
 
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        console.log(json);
+        setData(json);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: Error | any) {
+        console.log(error.message);
       }
-  
-      const json = await response.json();
-      console.log(json);
-      setData(json);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: Error | any) {
-      console.log(error.message)
-    }
     }
 
     fetchData();
-  }, [])
+  }, []);
   return (
     <>
       <section className="flex justify-between px-24 py-5">
@@ -82,7 +82,7 @@ export const HomePage = () => {
         <div className="flex items-center gap-3">
           <Image
             src={
-              "https://ucarecdn.com/80997a9b-8b5f-4f4f-b4f8-bf7a30e9ffe9/perodua.webp"
+              'https://ucarecdn.com/80997a9b-8b5f-4f4f-b4f8-bf7a30e9ffe9/perodua.webp'
             }
             alt="Perodua"
             width={50}
@@ -93,7 +93,7 @@ export const HomePage = () => {
         <div className="flex items-center gap-3">
           <Image
             src={
-              "https://ucarecdn.com/667207de-b722-4d1c-9096-f3a324cde916/protonsparepartssupplierinMalaysia.webp"
+              'https://ucarecdn.com/667207de-b722-4d1c-9096-f3a324cde916/protonsparepartssupplierinMalaysia.webp'
             }
             alt="Toyota"
             width={50}
@@ -104,7 +104,7 @@ export const HomePage = () => {
         <div className="flex items-center gap-3">
           <Image
             src={
-              "https://ucarecdn.com/a27ffd9a-76a7-4363-83db-cc70d91d6da2/HondasparepartssupplierinMalaysia.webp"
+              'https://ucarecdn.com/a27ffd9a-76a7-4363-83db-cc70d91d6da2/HondasparepartssupplierinMalaysia.webp'
             }
             alt="Honda"
             width={50}
@@ -115,7 +115,7 @@ export const HomePage = () => {
         <div className="flex items-center gap-3">
           <Image
             src={
-              "https://ucarecdn.com/d978a410-f006-4652-a07d-4b113493acef/mitsubishisparepartssupplierinMalaysia.webp"
+              'https://ucarecdn.com/d978a410-f006-4652-a07d-4b113493acef/mitsubishisparepartssupplierinMalaysia.webp'
             }
             alt="Mitsubitsi"
             width={50}
@@ -126,7 +126,7 @@ export const HomePage = () => {
         <div className="flex items-center gap-3">
           <Image
             src={
-              "https://ucarecdn.com/d382d922-cbab-4276-b342-3eb2fffcc0dd/toyota.webp"
+              'https://ucarecdn.com/d382d922-cbab-4276-b342-3eb2fffcc0dd/toyota.webp'
             }
             alt="Toyota"
             width={50}
@@ -135,8 +135,14 @@ export const HomePage = () => {
           <h1 className="text-2xl font-sans font-bold">Toyota</h1>
         </div>
       </section>
-      <ProductHighlight data={data} section="NEW ARRIVAL"/>
-      <ProductHighlight data={data} section="TOP SALES"/>
+      <ProductHighlight
+        data={data}
+        section="NEW ARRIVAL"
+      />
+      <ProductHighlight
+        data={data}
+        section="TOP SALES"
+      />
       <Comment
         userName="Farhan"
         message="Excellent service and top-notch quality! The parts I ordered fit perfectly, and the delivery was faster than expected. The prices are reasonable, and the customer support team was very responsive and helpful. The entire process was smooth, and I’m genuinely impressed with the professionalism. I will definitely be using this platform for future purchases!"
@@ -145,7 +151,13 @@ export const HomePage = () => {
   );
 };
 
-const ProductHighlight = ({ data, section }: { data: z.infer<typeof dataSchema>[], section: string }) => {
+const ProductHighlight = ({
+  data,
+  section,
+}: {
+  data: z.infer<typeof dataSchema>[];
+  section: string;
+}) => {
   return (
     <section
       className="px-24 py-12 flex flex-col gap-10 bg-white border border-muted"
@@ -157,7 +169,10 @@ const ProductHighlight = ({ data, section }: { data: z.infer<typeof dataSchema>[
         id="cart"
       >
         {data.map((product: z.infer<typeof dataSchema>) => (
-          <CardProduct key={product.id} product={product} />
+          <CardProduct
+            key={product.id}
+            product={product}
+          />
         ))}
       </div>
       <div className="flex justify-center">
@@ -183,7 +198,7 @@ const CardProduct = ({ product }: { product: z.infer<typeof dataSchema> }) => {
       <small className="pl-1 flex">
         {Array.from(
           { length: Math.floor(product.rate) },
-          (_, index) => index++,
+          (_, index) => index++
         ).map((i) => (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -223,9 +238,15 @@ const Comment = ({
       </h1>
       <div className="flex  justify-between px-24 py-8">
         {Array.from({ length: 3 }, (_, index) => index++).map((i) => (
-          <Card className="max-w-[31%] min-h-44" key={i}>
+          <Card
+            className="max-w-[31%] min-h-44"
+            key={i}
+          >
             <CardHeader>
-              <div className="flex" id="star">
+              <div
+                className="flex"
+                id="star"
+              >
                 {Array.from({ length: 5 }, (_, index) => index++).map((i) => (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
