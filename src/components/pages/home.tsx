@@ -1,11 +1,39 @@
+'use client'
+
 import Image from "next/image";
-import { data } from "../../../data";
-import { dummySchema } from "@/schema/data";
-import { z } from "zod";
+import { dataSchema } from "@/schema/data";
+import { useState } from "react";
+import { useEffect } from "react";
 
 import { Card, CardContent, CardHeader } from "../ui/card";
+import { z } from "zod";
+import 'dotenv/config'
 
 export const HomePage = () => {
+  const [data, setData] = useState([]);
+  // const [topSales, setTopSales] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/products`;
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+  
+      const json = await response.json();
+      console.log(json);
+      setData(json);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: Error | any) {
+      console.log(error.message)
+    }
+    }
+
+    fetchData();
+  }, [])
   return (
     <>
       <section className="flex justify-between px-24 py-5">
@@ -107,8 +135,8 @@ export const HomePage = () => {
           <h1 className="text-2xl font-sans font-bold">Toyota</h1>
         </div>
       </section>
-      <ProductHighlight section="NEW ARRIVAL" />
-      <ProductHighlight section="TOP SALES" />
+      <ProductHighlight data={data} section="NEW ARRIVAL"/>
+      <ProductHighlight data={data} section="TOP SALES"/>
       <Comment
         userName="Farhan"
         message="Excellent service and top-notch quality! The parts I ordered fit perfectly, and the delivery was faster than expected. The prices are reasonable, and the customer support team was very responsive and helpful. The entire process was smooth, and I’m genuinely impressed with the professionalism. I will definitely be using this platform for future purchases!"
@@ -117,7 +145,7 @@ export const HomePage = () => {
   );
 };
 
-const ProductHighlight = ({ section }: { section: string }) => {
+const ProductHighlight = ({ data, section }: { data: z.infer<typeof dataSchema>[], section: string }) => {
   return (
     <section
       className="px-24 py-12 flex flex-col gap-10 bg-white border border-muted"
@@ -128,7 +156,7 @@ const ProductHighlight = ({ section }: { section: string }) => {
         className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 p-4"
         id="cart"
       >
-        {data.map((product: z.infer<typeof dummySchema>) => (
+        {data.map((product: z.infer<typeof dataSchema>) => (
           <CardProduct key={product.id} product={product} />
         ))}
       </div>
@@ -141,11 +169,11 @@ const ProductHighlight = ({ section }: { section: string }) => {
   );
 };
 
-const CardProduct = ({ product }: { product: z.infer<typeof dummySchema> }) => {
+const CardProduct = ({ product }: { product: z.infer<typeof dataSchema> }) => {
   return (
     <div className="flex flex-col gap-2">
       <Image
-        src={product.imageUrl}
+        src={product.imageUrl[0].imageUrl}
         alt={product.name}
         width={200}
         height={200}
