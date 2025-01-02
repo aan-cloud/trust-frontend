@@ -1,45 +1,16 @@
-import { dummySchema } from "@/schema/data";
-import { z } from "zod";
 
-export const data: z.infer<typeof dummySchema>[] = [
+
+export const navigations = [
   {
-    id: 1,
-    name: "Toyota brake",
-    imageUrl:
-      "https://ucarecdn.com/a4e126cb-7f5d-4232-a43e-645cee7a2339/toyotabrake.webp",
-    price: 200000,
-    rate: 4.9,
+    name: "products",
+    href: "/products"
   },
   {
-    id: 2,
-    name: "Toyota brake",
-    imageUrl:
-      "https://ucarecdn.com/a4e126cb-7f5d-4232-a43e-645cee7a2339/toyotabrake.webp",
-    price: 200000,
-    rate: 4.9,
+    name: "seller",
+    href: "/seller"
   },
   {
-    id: 3,
-    name: "Toyota brake",
-    imageUrl:
-      "https://ucarecdn.com/a4e126cb-7f5d-4232-a43e-645cee7a2339/toyotabrake.webp",
-    price: 200000,
-    rate: 4.9,
+    name: "menu",
+    href: "/menu"
   },
-  {
-    id: 4,
-    name: "Toyota brake",
-    imageUrl:
-      "https://ucarecdn.com/a4e126cb-7f5d-4232-a43e-645cee7a2339/toyotabrake.webp",
-    price: 200000,
-    rate: 4.9,
-  },
-  {
-    id: 5,
-    name: "Toyota brake",
-    imageUrl:
-      "https://ucarecdn.com/a4e126cb-7f5d-4232-a43e-645cee7a2339/toyotabrake.webp",
-    price: 200000,
-    rate: 4.9,
-  },
-];
+]
