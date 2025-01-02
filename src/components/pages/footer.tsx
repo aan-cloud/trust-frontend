@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <section className="flex justify-between px-24 py-14 gap-5 ">
+    <section className="flex justify-between border-t mt-4 px-24 py-14 gap-5 ">
       <div className="">
         <header>
           <h1 className="font-sans text-4xl font-black uppercase text-primary">
