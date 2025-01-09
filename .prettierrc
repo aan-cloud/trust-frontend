@@ -11,6 +11,5 @@
   "singleAttributePerLine": true,
   "jsxBracketSameLine": false,
   "quoteProps": "as-needed",
-  "eslintIntegration": true,
   "vscode": true
 }
