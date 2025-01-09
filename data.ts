@@ -1,14 +1,20 @@
 export const navigations = [
   {
-    name: 'products',
+    name: 'Products',
     href: '/products',
   },
   {
-    name: 'seller',
+    name: 'Seller',
     href: '/seller',
   },
   {
-    name: 'menu',
+    name: 'Menu',
     href: '/menu',
   },
+];
+
+export const breadcrumbData = [
+  { label: 'Home', href: '/', isCurrentPage: false },
+  { label: 'Products', href: '/products', isCurrentPage: false },
+  { label: 'Register', href: '/register', isCurrentPage: true },
 ];
