@@ -4,10 +4,12 @@ import Image from 'next/image';
 import { dataSchema } from '@/schema/data';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { CardProduct } from '../ui/cardProduct';
 
 import { Card, CardContent, CardHeader } from '../ui/card';
 import { z } from 'zod';
 import 'dotenv/config';
+import Link from 'next/link';
 
 export const HomePage = () => {
   const [data, setData] = useState([]);
@@ -45,9 +47,12 @@ export const HomePage = () => {
             Look for the items you want, complete, reliable and original
             products that are trusted by more than 100 users.
           </p>
-          <button className="px-4 py-2 text-white w-fit border bg-primary rounded-lg">
+          <Link
+            href={'/products'}
+            className="px-4 py-2 text-white w-fit border bg-primary rounded-lg"
+          >
             Shop now
-          </button>
+          </Link>
           <ul className="mt-4 flex justify-start gap-6">
             <li className="pr-7 font-poppins">
               <h3 className="text-2xl font-semibold">200+</h3>
@@ -181,44 +186,6 @@ const ProductHighlight = ({
         </button>
       </div>
     </section>
-  );
-};
-
-const CardProduct = ({ product }: { product: z.infer<typeof dataSchema> }) => {
-  return (
-    <div className="flex flex-col gap-2">
-      <Image
-        src={product.imageUrl[0].imageUrl}
-        alt={product.name}
-        width={200}
-        height={200}
-        className="rounded-xl"
-      />
-      <h2 className="pl-1 font-sans text-sm font-bold">{product.name}</h2>
-      <small className="pl-1 flex">
-        {Array.from(
-          { length: Math.floor(product.rate) },
-          (_, index) => index++
-        ).map((i) => (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            key={i}
-            className="size-3 stroke-yellow-500 fill-yellow-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
-            />
-          </svg>
-        ))}
-      </small>
-      <h1 className="pl-1 text-base font-bold font-sans">{`RP ${product.price}`}</h1>
-    </div>
   );
 };
 
