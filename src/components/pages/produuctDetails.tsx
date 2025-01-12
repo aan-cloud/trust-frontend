@@ -22,8 +22,9 @@ import { Button } from '../ui/button';
 export const ProductDetails = ({
   product,
 }: {
-  product: z.infer<typeof productDetailsSchema>;
+  product: z.infer<typeof productDetailsSchema>
 }) => {
+
   const form = useForm<z.infer<typeof inserToCartSchema>>({
     resolver: zodResolver(inserToCartSchema),
     defaultValues: {

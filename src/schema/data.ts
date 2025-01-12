@@ -7,7 +7,7 @@ const imageSchema = z.object({
 });
 
 export const dataSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   description: z.string(),
   imageUrl: z.array(imageSchema),
   name: z.string(),
