@@ -1,7 +1,9 @@
 'use client';
+
 import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
+import Cookies from 'js-cookie'
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { searchSchema } from '@/schema/search';
@@ -10,8 +12,28 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigations } from '../../../data';
+import { useEffect, useState } from 'react';
 
 export const Header = () => {
+  const [isAuth, setIsAuth] = useState(false);
+
+
+  useEffect(() => {
+    function getAccessToken() {
+      const token = Cookies.get("access token");
+
+      if(!token) {
+        setIsAuth(false)
+      } else {
+        setIsAuth(true)
+      }
+    }
+
+    getAccessToken();
+  }, [isAuth])
+
+  const pathName = usePathname();
+
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -73,7 +95,10 @@ export const Header = () => {
         className="flex gap-4 ml-28"
         id="logo"
       >
-        <svg
+        {
+          isAuth ? (
+            <>
+              <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -115,6 +140,21 @@ export const Header = () => {
             d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
           />
         </svg>
+            </>
+          ) : (
+            <Link
+          href={"/register"}
+          className={clsx(
+            'hover:bg-primary rounded-sm hover:text-white py-2 px-2 font-poppins',
+            {
+              'bg-primary text-white': pathName === "/register" || pathName === "/login",
+            }
+          )}
+        >
+          Register / Login
+        </Link>
+          )
+        }
       </div>
     </header>
   );

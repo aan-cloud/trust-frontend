@@ -12,7 +12,7 @@ export const CardProduct = ({
     <Link
       href="/products/[slug]"
       as={`/products/${product.slug}`}
-      className="flex flex-col gap-2"
+      className="flex flex-col gap-2 hover:border-b-4 hover:border-primary"
     >
       <Image
         src={product.imageUrl[0].imageUrl}

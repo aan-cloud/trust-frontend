@@ -25,7 +25,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
   onSubmit,
 }) => {
   return (
-    <section className="flex justify-center items-center pt-8">
+    <section className="flex justify-center items-center pt-8 py-20">
       <div className="flex flex-col items-left min-w-[30%] px-7 py-6 border-border border-2 rounded-md shadow-md bg-white">
         <h1 className="font-normal text-xl font-sans mb-6">
           Register new account
@@ -37,7 +37,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
           >
             <FormField
               control={form.control}
-              name="userName"
+              name="username"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Username</FormLabel>

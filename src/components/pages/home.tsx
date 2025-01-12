@@ -206,7 +206,7 @@ const Comment = ({
       <div className="flex  justify-between px-24 py-8">
         {Array.from({ length: 3 }, (_, index) => index++).map((i) => (
           <Card
-            className="max-w-[31%] min-h-44"
+            className="max-w-[31%] min-h-44 hover:border hover:border-primary hover:cursor-pointer"
             key={i}
           >
             <CardHeader>
