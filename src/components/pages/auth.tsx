@@ -11,33 +11,49 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { UseFormReturn } from 'react-hook-form';
-
-import { z } from 'zod';
 import { authSchema } from '@/schema/register';
-import { convertToTitleCase } from '@/lib/utils';
+import { authFetch } from '@/server/dataFetchers';
+import { useRouter } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-interface RegisterPageProps {
-  form: UseFormReturn<z.infer<typeof authSchema>>;
-  page: string;
-  onSubmit: (values: z.infer<typeof authSchema>) => void;
+interface AuthPageProps {
+  page: 'login' | 'register';
 }
 
-export const AuthPage: React.FC<RegisterPageProps> = ({
-  form,
-  page,
-  onSubmit,
-}) => {
+export const AuthPage: React.FC<AuthPageProps> = ({ page }) => {
+  const router = useRouter();
+  const isRegister = page === 'register';
 
-  const convertPageName = convertToTitleCase(page);
+  const form = useForm<z.infer<typeof authSchema>>({
+    resolver: zodResolver(authSchema),
+    defaultValues: {
+      username: '',
+      ...(isRegister ? { email: '' } : {}),
+      password: '',
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof authSchema>) {
+    await authFetch({
+      username: values.username,
+      ...(isRegister ? { email: values.email } : {}),
+      password: values.password,
+    }, page);
+
+    if (isRegister) {
+      router.push("/login")
+    } else {
+      router.push("/")
+    }
+  }
 
   return (
     <section className="flex justify-center items-center pt-8 py-20">
       <div className="flex flex-col items-left min-w-[30%] px-7 py-6 border-border border-2 rounded-md shadow-md bg-white">
         <h1 className="font-normal text-xl font-sans mb-6">
-          {
-            convertPageName === "Register" ? `${convertPageName} new acount` : `${convertPageName} to your account`
-          }
+          {isRegister ? 'Register new account' : 'Login to your account'}
         </h1>
         <Form {...form}>
           <form
@@ -52,7 +68,7 @@ export const AuthPage: React.FC<RegisterPageProps> = ({
                   <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="shadcn"
+                      placeholder="Enter your username"
                       {...field}
                     ></Input>
                   </FormControl>
@@ -60,22 +76,24 @@ export const AuthPage: React.FC<RegisterPageProps> = ({
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className={ page !== "register" ? "hidden" : "block" }>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="shadcn"
-                      {...field}
-                    ></Input>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {isRegister && (
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your email"
+                        {...field}
+                      ></Input>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
             <FormField
               control={form.control}
               name="password"
@@ -85,7 +103,7 @@ export const AuthPage: React.FC<RegisterPageProps> = ({
                   <FormControl>
                     <Input
                       className="border ring-primary"
-                      placeholder="shadcn"
+                      placeholder="Enter your password"
                       {...field}
                     ></Input>
                   </FormControl>
@@ -95,24 +113,20 @@ export const AuthPage: React.FC<RegisterPageProps> = ({
             />
             <div>
               <small>
-                {
-                  convertPageName === "Register" ? "You already have an account?" : "You don't have an account? "
-                }
+                {isRegister ? "Already have an account? " : "Don't have an account? "}
               </small>
               <Link
-                href={page === "register" ? "/login" : "/register"}
+                href={isRegister ? "/login" : "/register"}
                 className="text-sm text-blue-800 underline"
               >
-                {
-                  page === "register" ? convertToTitleCase("login") : convertToTitleCase("register")
-                }
+                {isRegister ? 'Login' : 'Register'}
               </Link>
             </div>
             <Button
               type="submit"
               className="bg-primary"
             >
-              Submit
+              {isRegister ? 'Register' : 'Login'}
             </Button>
           </form>
         </Form>
@@ -120,3 +134,4 @@ export const AuthPage: React.FC<RegisterPageProps> = ({
     </section>
   );
 };
+
