@@ -1,4 +1,5 @@
 'use client';
+
 import Link from 'next/link';
 import {
   Form,
@@ -13,22 +14,30 @@ import { Button } from '@/components/ui/button';
 import { UseFormReturn } from 'react-hook-form';
 
 import { z } from 'zod';
-import { registerSchema } from '@/schema/register';
+import { authSchema } from '@/schema/register';
+import { convertToTitleCase } from '@/lib/utils';
 
 interface RegisterPageProps {
-  form: UseFormReturn<z.infer<typeof registerSchema>>;
-  onSubmit: (values: z.infer<typeof registerSchema>) => void;
+  form: UseFormReturn<z.infer<typeof authSchema>>;
+  page: string;
+  onSubmit: (values: z.infer<typeof authSchema>) => void;
 }
 
-export const RegisterPage: React.FC<RegisterPageProps> = ({
+export const AuthPage: React.FC<RegisterPageProps> = ({
   form,
+  page,
   onSubmit,
 }) => {
+
+  const convertPageName = convertToTitleCase(page);
+
   return (
     <section className="flex justify-center items-center pt-8 py-20">
       <div className="flex flex-col items-left min-w-[30%] px-7 py-6 border-border border-2 rounded-md shadow-md bg-white">
         <h1 className="font-normal text-xl font-sans mb-6">
-          Register new account
+          {
+            convertPageName === "Register" ? `${convertPageName} new acount` : `${convertPageName} to your account`
+          }
         </h1>
         <Form {...form}>
           <form
@@ -55,7 +64,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className={ page !== "register" ? "hidden" : "block" }>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
@@ -85,12 +94,18 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({
               )}
             />
             <div>
-              <small>You already have an account? </small>
+              <small>
+                {
+                  convertPageName === "Register" ? "You already have an account?" : "You don't have an account? "
+                }
+              </small>
               <Link
-                href={'/login'}
+                href={page === "register" ? "/login" : "/register"}
                 className="text-sm text-blue-800 underline"
               >
-                Login
+                {
+                  page === "register" ? convertToTitleCase("login") : convertToTitleCase("register")
+                }
               </Link>
             </div>
             <Button

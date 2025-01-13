@@ -15,12 +15,12 @@ import { navigations } from '../../../data';
 import { useEffect, useState } from 'react';
 
 export const Header = () => {
+  // bug harus refresh
   const [isAuth, setIsAuth] = useState(false);
-
 
   useEffect(() => {
     function getAccessToken() {
-      const token = Cookies.get("access token");
+      const token = Cookies.get("accesToken");
 
       if(!token) {
         setIsAuth(false)
@@ -30,7 +30,7 @@ export const Header = () => {
     }
 
     getAccessToken();
-  }, [isAuth])
+  })
 
   const pathName = usePathname();
 
