@@ -23,12 +23,31 @@ const imageUrls = z.object({
   productId: z.string(),
 });
 
+export const roles = z.object({
+  roleId: z.string(),
+  userId: z.string(),
+  id: z.string()
+});
+
+const ratings = z.object({
+  rate: z.number()
+});
+
 export const productDetailsSchema = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
   imageUrl: z.array(imageUrls),
   price: z.number(),
+  user: z.object({
+    userName: z.string(),
+    description: z.string(),
+    roles: z.array(roles)
+  }),
+  category: z.object({
+    name: z.string()
+  }),
+  ratings: z.array(ratings),
   slug: z.string(),
   stock: z.number(),
 });
@@ -46,5 +65,4 @@ export const filterSchema = z.object({
 
 export const inserToCartSchema = z.object({
   quantity: z.number(),
-  productId: z.string(),
 });

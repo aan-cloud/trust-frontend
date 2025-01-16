@@ -10,6 +10,7 @@ import { inserToCartSchema } from '@/schema/data';
 import { Input } from '../ui/input';
 import { Form, FormControl, FormField, FormItem } from '../ui/form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+// import { useRouter } from 'next/navigation';
 import {
   Carousel,
   CarouselContent,
@@ -17,24 +18,35 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import Cookies from 'js-cookie';
 import { Button } from '../ui/button';
+import { convertToTitleCase } from '@/lib/utils';
+import { addToCart } from '@/server/dataFetchers';
 
 export const ProductDetails = ({
   product,
 }: {
   product: z.infer<typeof productDetailsSchema>
 }) => {
+  // const router = useRouter();
 
   const form = useForm<z.infer<typeof inserToCartSchema>>({
     resolver: zodResolver(inserToCartSchema),
     defaultValues: {
       quantity: 1,
-      productId: '',
     },
   });
 
-  function onSubmit(values: z.infer<typeof inserToCartSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof inserToCartSchema>) {
+    const token = Cookies.get("accesToken");
+
+    if (!token) {
+      throw new Error("You're not authentication user")
+    }
+
+    await addToCart(product.id, token, values.quantity)
+
+    // router.push("/cart")
   }
 
   return (
@@ -90,9 +102,21 @@ export const ProductDetails = ({
             <h2 className="mb-4 text-2xl font-bold font-sans text-primary">
               RM {product.price}
             </h2>
-            <small className="text-sm font-thin text-stone-500 font-poppins">
-              {product.description}
-            </small>
+            <div className='flex gap-3 items-center'>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-8 fill-primary ">
+                <path d="M5.223 2.25c-.497 0-.974.198-1.325.55l-1.3 1.298A3.75 3.75 0 0 0 7.5 9.75c.627.47 1.406.75 2.25.75.844 0 1.624-.28 2.25-.75.626.47 1.406.75 2.25.75.844 0 1.623-.28 2.25-.75a3.75 3.75 0 0 0 4.902-5.652l-1.3-1.299a1.875 1.875 0 0 0-1.325-.549H5.223Z" />
+                <path fillRule="evenodd" d="M3 20.25v-8.755c1.42.674 3.08.673 4.5 0A5.234 5.234 0 0 0 9.75 12c.804 0 1.568-.182 2.25-.506a5.234 5.234 0 0 0 2.25.506c.804 0 1.567-.182 2.25-.506 1.42.674 3.08.675 4.5.001v8.755h.75a.75.75 0 0 1 0 1.5H2.25a.75.75 0 0 1 0-1.5H3Zm3-6a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75v-3Zm8.25-.75a.75.75 0 0 0-.75.75v5.25c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-5.25a.75.75 0 0 0-.75-.75h-3Z" clipRule="evenodd" />
+              </svg>
+              <h1 className='font-sans text-xl font-bold'>{convertToTitleCase(product.user.userName)}</h1>
+            </div>
+            <div className="flex gap-3 mt-3 items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7 fill-primary">
+                <path fillRule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clipRule="evenodd" />
+              </svg>
+              <h1 className='items-center text-xl font-bold font-sans '>
+                {convertToTitleCase(product.category.name)}
+              </h1>
+            </div>
           </div>
           <Form {...form}>
             <form
@@ -112,22 +136,6 @@ export const ProductDetails = ({
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         value={field.value}
                         className="w-20"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="productId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="hidden"
-                        name="productId"
-                        value={product.id}
                       />
                     </FormControl>
                   </FormItem>
