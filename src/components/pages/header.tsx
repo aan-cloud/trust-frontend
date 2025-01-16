@@ -13,19 +13,27 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigations } from '../../../data';
 import { useEffect, useState } from 'react';
+import { refreshAccesToken } from '@/server/dataFetchers';
 
 export const Header = () => {
   // bug harus refresh
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    function getAccessToken() {
-      const token = Cookies.get("accesToken");
+    async function getAccessToken() {
+      const accesToken = Cookies.get("accesToken");
+      const refreshToken = Cookies.get("refreshToken");
 
-      if(!token) {
-        setIsAuth(false)
+      if(refreshToken) {
+        if (!accesToken) {
+          await refreshAccesToken(refreshToken);
+
+          setIsAuth(true);
+        } else {
+          setIsAuth(true);
+        }
       } else {
-        setIsAuth(true)
+        setIsAuth(false)
       }
     }
 
@@ -164,7 +172,7 @@ const NavLinks = () => {
   const pathName = usePathname();
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 font-sans font-medium">
       {navigations.map((link) => (
         <Link
           key={link.name}
