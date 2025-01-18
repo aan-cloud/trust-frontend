@@ -77,7 +77,7 @@ export const ProductsList = () => {
   }
 
   return (
-    <section className="px-24 pb-9">
+    <section className="px-24 py-5 pb-9">
       <DynamicBreadcrumbs />
       <div className="flex gap-7 mt-8">
         <Filter

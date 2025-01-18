@@ -1,6 +1,6 @@
 import { ProductDetails } from '@/components/pages/produuctDetails';
 import { Suspense } from 'react';
-import { SkeletonCard } from '@/components/ui/skeletonCard';
+import LoadingIndicator from '@/components/ui/loadingIndicator';
 
 import 'dotenv/config';
 
@@ -23,7 +23,7 @@ export default async function Page({
   console.log(product);
 
   return (
-    <Suspense fallback={<SkeletonCard />}>
+    <Suspense fallback={<LoadingIndicator />}>
       <ProductDetails product={product}/>
     </Suspense>
   )
