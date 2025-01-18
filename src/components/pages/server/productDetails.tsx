@@ -1,16 +1,8 @@
-'use client';
-
-import { DynamicBreadcrumbs } from '../ui/dynamicBreadcrumbs';
+import { DynamicBreadcrumbs } from '../../ui/dynamicBreadcrumbs';
 import { z } from 'zod';
 import { productDetailsSchema } from '@/schema/data';
 import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { inserToCartSchema } from '@/schema/data';
-import { Input } from '../ui/input';
-import { Form, FormControl, FormField, FormItem } from '../ui/form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useRouter } from 'next/navigation';
 import {
   Carousel,
   CarouselContent,
@@ -18,43 +10,16 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import Cookies from 'js-cookie';
-import { Button } from '../ui/button';
 import { convertToTitleCase } from '@/lib/utils';
-import { addToCart } from '@/server/dataFetchers';
-import { toast } from 'sonner';
+import { AddToCartHandler } from '../client/addToCartHandler';
 
-export const ProductDetails = ({
+type ProductDetails = z.infer<typeof productDetailsSchema>
+
+export const ProductDetails = async ({
   product,
 }: {
-  product: z.infer<typeof productDetailsSchema>
+  product: ProductDetails
 }) => {
-  const router = useRouter();
-
-  const form = useForm<z.infer<typeof inserToCartSchema>>({
-    resolver: zodResolver(inserToCartSchema),
-    defaultValues: {
-      quantity: 1,
-    },
-  });
-
-  async function onSubmit(values: z.infer<typeof inserToCartSchema>) {
-    const token = Cookies.get("accesToken");
-
-    if (!token) {
-      throw new Error("You're not authentication user")
-    }
-
-    toast('Add item to cart succesfully', {
-      description: new Date().toISOString().split('T')[0],
-      action: { label: 'Close', onClick: () => '' },
-    });
-
-    await addToCart(product.id, token, values.quantity)
-
-
-    router.push("/cart")
-  }
 
   return (
     <section className="flex flex-col gap-5 px-24 py-5">
@@ -125,38 +90,7 @@ export const ProductDetails = ({
               </h1>
             </div>
           </div>
-          <Form {...form}>
-            <form
-              className="flex gap-3"
-              onSubmit={form.handleSubmit(onSubmit)}
-            >
-              <FormField
-                control={form.control}
-                name="quantity"
-                render={({ field }) => (
-                  <FormItem className="flex-grow">
-                    <FormControl>
-                      <Input
-                        type="number"
-                        name="quantity"
-                        min={1}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        value={field.value}
-                        className="w-20"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-
-              <Button
-                className="w-full"
-                type="submit"
-              >
-                Add to cart
-              </Button>
-            </form>
-          </Form>
+          <AddToCartHandler product={product}/>
         </div>
       </div>
       <div className="w-full mt-12">
@@ -204,3 +138,5 @@ export const ProductDetails = ({
     </section>
   );
 };
+
+

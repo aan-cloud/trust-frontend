@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteCartItem } from "@/server/dataFetchers"
+import { deleteCartItem } from "@/requests/cart";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies"
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";

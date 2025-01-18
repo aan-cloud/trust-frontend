@@ -1,8 +1,10 @@
-import { ProductDetails } from '@/components/pages/produuctDetails';
-import { Suspense } from 'react';
-import LoadingIndicator from '@/components/ui/loadingIndicator';
-
+import { ProductDetails } from '@/components/pages/server/productDetails';
 import 'dotenv/config';
+import { getProductDetails } from '@/requests/products';
+import { z } from 'zod';
+import { productDetailsSchema } from '@/schema/data';
+
+type ProductDetails = z.infer<typeof productDetailsSchema>
 
 export default async function Page({
   params,
@@ -11,20 +13,9 @@ export default async function Page({
 }) {
   const slug = (await params).slug;
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/${slug}`;
-
-  const response = await fetch(url);
-
-  if (!response) {
-    throw new Error("Can't find product");
-  }
-
-  const product = await response.json();
-  console.log(product);
+  const product: ProductDetails = await getProductDetails(slug);
 
   return (
-    <Suspense fallback={<LoadingIndicator />}>
       <ProductDetails product={product}/>
-    </Suspense>
   )
 }

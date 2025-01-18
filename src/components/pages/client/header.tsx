@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '../ui/button';
-import { Form, FormControl, FormField, FormItem } from '../ui/form';
-import { Input } from '../ui/input';
+import { Button } from '../../ui/button';
+import { Form, FormControl, FormField, FormItem } from '../../ui/form';
+import { Input } from '../../ui/input';
 import Cookies from 'js-cookie'
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -11,11 +11,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { navigations } from '../../../data';
+import { navigations } from '../../../../data';
 import { useEffect, useState } from 'react';
-import { refreshAccesToken } from '@/server/dataFetchers';
+import { refreshAccesToken } from '@/requests/auth';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export const Header = () => {
+
+  const router = useRouter();
 
   const [isAuth, setIsAuth] = useState(false);
 
@@ -27,7 +31,11 @@ export const Header = () => {
       if(refreshToken) {
         if (!accesToken) {
           await refreshAccesToken(refreshToken);
-
+          router.push("/")
+          toast('Relogin succes', {
+            description: new Date().toISOString().split('T')[0],
+            action: { label: 'Close', onClick: () => '' },
+        });
           setIsAuth(true);
         } else {
           setIsAuth(true);

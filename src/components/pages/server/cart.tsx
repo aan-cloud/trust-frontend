@@ -1,17 +1,23 @@
-import { getUserCart } from "@/server/dataFetchers";
+import { getUserCart } from "@/requests/cart";
 import { userCartSchema } from "@/schema/cart";
 import { z } from "zod";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import { DynamicBreadcrumbs } from "../ui/dynamicBreadcrumbs";
-import { Button } from "../ui/button";
-import { DeleteHandler } from "./client/deleteHandler";
+import { DynamicBreadcrumbs } from "../../ui/dynamicBreadcrumbs";
+import { Button } from "../../ui/button";
+import { DeleteHandler } from "../client/deleteHandler";
+import { redirect } from "next/navigation";
 
 type UserCartSchema = z.infer<typeof userCartSchema>
 
 export const CartPage = async () => {
     const cookie = await cookies();
     const accesToken = cookie.get("accesToken");
+
+    if (!accesToken) {
+        redirect("/");
+    }
+    
     const userCart: UserCartSchema = await getUserCart(accesToken);
 
     return (
