@@ -104,6 +104,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ page }) => {
                     <Input
                       className="border ring-primary"
                       placeholder="Enter your password"
+                      type='password'
                       {...field}
                     ></Input>
                   </FormControl>
