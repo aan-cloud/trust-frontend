@@ -52,33 +52,33 @@ export const CartPage = async () => {
                         )
                     }
                 </div>
-                <CheckOutHandler/>
+                <CheckOutHandler totalPrice={userCart.totalPrice}/>
             </div>
         </section>
     )
 }
 
-const CheckOutHandler = () => {
+const CheckOutHandler = ({ totalPrice }: { totalPrice: number }) => {
     return (
         <div className="flex flex-col border rounded-lg gap-2 h-fit min-w-[35%] p-5">
                     <h1 className="font-bold font-sans">Order Summary</h1>
                     <ul className="border-b pb-2">
                         <li className="flex justify-between">
                             <small>Subtotal</small>
-                            <h5 className="font-semibold">200</h5>
+                            <h5 className="font-semibold">{totalPrice}</h5>
                         </li>
                         <li className="flex justify-between">
-                            <small>Discount (20%)</small>
-                            <h5 className="font-semibold text-red-500">- 4</h5>
+                            <small>Discount (0%)</small>
+                            <h5 className="font-semibold text-red-500">-</h5>
                         </li>
                         <li className="flex justify-between">
                             <small>Delivery Fee</small>
-                            <h5 className="font-semibold">12</h5>
+                            <h5 className="font-semibold">-</h5>
                         </li>
                     </ul>
                     <div id="total" className="flex justify-between">
                         <small>Total</small>
-                        <h5 className="font-semibold">208</h5>
+                        <h5 className="font-semibold">{totalPrice}</h5>
                     </div>
                     <Button className="mt-2">Checkout</Button>
                 </div>

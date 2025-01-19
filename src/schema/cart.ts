@@ -10,6 +10,7 @@ const cartItemSchema = z.object({
 })
 
 export const userCartSchema = z.object({
+    totalPrice: z.number(),
     id: z.string(),
     userId: z.string(),
     items: z.array(cartItemSchema)
