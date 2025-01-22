@@ -59,6 +59,8 @@ export const Header = () => {
 
   function onSubmit(values: z.infer<typeof searchSchema>) {
     console.log(values);
+    const queryString = new URLSearchParams(values).toString();
+    router.push(`/products?${queryString}`)
   }
 
   return (
@@ -84,7 +86,10 @@ export const Header = () => {
                   <Input
                     placeholder="Search"
                     {...field}
-                  ></Input>
+                    onChange={(e) => {
+                      field.onChange(e);
+                    }}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -146,7 +151,7 @@ export const Header = () => {
           />
         </svg>
         </Link>
-        <Link href={"/profile"}>
+        <Link href={"/user"}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

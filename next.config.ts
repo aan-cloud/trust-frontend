@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'ucarecdn.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'lumiere-a.akamaihd.net',
+      },
     ],
   },
 };

@@ -23,45 +23,67 @@ import { useState, useEffect } from 'react';
 import { CardProduct } from '../../ui/cardProduct';
 import { dataSchema } from '@/schema/data';
 import { toast } from 'sonner';
+// import { useRouter } from 'next/navigation';
 
-export const ProductsList = () => {
-  const [data, setData] = useState([]);
-  const [filter, setFilter] = useState<{ category?: string; price?: number }>(
-    {}
-  );
+type ProductSchema = z.infer<typeof dataSchema>
+
+type Filter = {
+  name?: { contains: string}
+  price?: { lt: number}
+  category?: { name: string}
+}
+
+export const ProductsList = ({ name }: { name: string }) => {
+  const [data, setData] = useState<ProductSchema[]>([])
+  const [filter, setFilter] = useState<Filter>({})
 
   useEffect(() => {
     async function fetchData() {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
-      const params = new URLSearchParams({
-        filter: JSON.stringify(filter),
-      });
+      const newFilter = name
+        ? {
+            name: {
+              contains: name,
+              mode: "insensitive",
+            },
+          }
+        : { ...filter }
 
-      const url = `${baseUrl}/products?${params}`;
+      const filterString = encodeURIComponent(JSON.stringify(newFilter))
+
+      const url = `${baseUrl}/products?filter=${filterString}`
 
       try {
-        const response = await fetch(url);
+        const response = await fetch(url)
 
         if (!response.ok) {
-          toast('Failed applying the filter', {
-            description: new Date().toISOString().split('T')[0],
-            action: { label: 'Close', onClick: () => '' },
-          });
-          throw new Error(`Response status: ${response.status}`);
+          toast("Failed applying the filter", {
+            description: new Date().toISOString().split("T")[0],
+            action: { label: "Close", onClick: () => "" },
+          })
+          throw new Error(`Response status: ${response.status}`)
         }
 
-        const json = await response.json();
-        console.log(json);
-        setData(json);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const json = await response.json()
+
+        if (!json.length) {
+          toast("No product", {
+            description: new Date().toISOString().split("T")[0],
+            action: { label: "Close", onClick: () => "" },
+          })
+        };
+        
+        console.log(json)
+        setData(json)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: Error | any) {
-        console.log(error.message);
+        console.log(error.message)
       }
     }
 
-    fetchData();
-  }, [filter]);
+    fetchData()
+  }, [filter, name])
 
   const form = useForm<z.infer<typeof filterSchema>>({
     resolver: zodResolver(filterSchema),
@@ -72,8 +94,14 @@ export const ProductsList = () => {
   });
 
   function onSubmit(values: z.infer<typeof filterSchema>) {
-    console.log(values);
-    setFilter(values);
+    setFilter({
+      category: {
+        name: values.category,
+      },
+      price: {
+        lt: values.price,
+      }
+    })
   }
 
   return (
@@ -83,6 +111,7 @@ export const ProductsList = () => {
         <Filter
           onSubmit={onSubmit}
           form={form}
+          name={name}
         />
         <div
           className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 px-4 flex-grow"
@@ -103,15 +132,17 @@ export const ProductsList = () => {
 const Filter = ({
   onSubmit,
   form,
+  name
 }: {
   onSubmit: (data: z.infer<typeof filterSchema>) => void;
   form: UseFormReturn<z.infer<typeof filterSchema>>;
+  name: string
 }) => {
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="p-5 flex flex-col gap-3 border rounded-md max-h-64"
+        className={name ? "hidden" :"p-5 flex flex-col gap-3 border rounded-md max-h-64"}
       >
         <div className="flex justify-between border-b pb-2">
           <h1 className="font-sans font-semibold">Filters</h1>
