@@ -4,9 +4,9 @@ import { z } from "zod";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import { DynamicBreadcrumbs } from "../../ui/dynamicBreadcrumbs";
-import { Button } from "../../ui/button";
 import { DeleteHandler } from "../client/deleteHandler";
 import { redirect } from "next/navigation";
+import { CheckoutHandler } from "../client/checkoutHandler";
 
 type UserCartSchema = z.infer<typeof userCartSchema>
 
@@ -52,13 +52,14 @@ export const CartPage = async () => {
                         )
                     }
                 </div>
-                <CheckOutHandler totalPrice={userCart.totalPrice}/>
+                <CheckOut totalPrice={userCart.totalPrice} />
             </div>
         </section>
     )
 }
 
-const CheckOutHandler = ({ totalPrice }: { totalPrice: number }) => {
+const CheckOut = ({ totalPrice }: { totalPrice: number }) => {
+
     return (
         <div className="flex flex-col border rounded-lg gap-2 h-fit min-w-[35%] p-5">
                     <h1 className="font-bold font-sans">Order Summary</h1>
@@ -80,7 +81,7 @@ const CheckOutHandler = ({ totalPrice }: { totalPrice: number }) => {
                         <small>Total</small>
                         <h5 className="font-semibold">{totalPrice}</h5>
                     </div>
-                    <Button className="mt-2">Checkout</Button>
+                    <CheckoutHandler totalPrice={totalPrice}/>
                 </div>
     )
 }
