@@ -6,7 +6,7 @@ const imageSchema = z.object({
   productId: z.string(),
 });
 
-export const dataSchema = z.object({
+export const productSchema = z.object({
   id: z.string(),
   description: z.string(),
   imageUrl: z.array(imageSchema),

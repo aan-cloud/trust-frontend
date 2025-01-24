@@ -2,14 +2,18 @@ import 'dotenv/config';
 import { filterSchema } from '@/schema/data';
 import { z } from 'zod';
 
-export const getAllProducts = async (filter: z.infer<typeof filterSchema>) => {
+export const getAllProducts = async (filter?: z.infer<typeof filterSchema>) => {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    const params = new URLSearchParams({
-      filter: JSON.stringify(filter),
-    });
+    let params;
 
-    const url = `${baseUrl}/products?${params}`;
+    if (filter) {
+      params = new URLSearchParams({
+        filter: JSON.stringify(filter),
+      });
+    };
+
+    const url = `${baseUrl}/products${filter ? `?${params}` : ""}`;
 
     try {
       const response = await fetch(url);
