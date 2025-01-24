@@ -9,9 +9,7 @@ type UserProfile = z.infer<typeof userProfile>
 export const UserProfile = async () => {
     const cookie = await cookies();
     const accesToken = cookie.get("accesToken");
-    console.log(accesToken);
     const userProfile: UserProfile = await getUserProfile(accesToken?.value);
-    console.log(userProfile)
 
     return (
         <div className="w-full py-5 flex flex-col gap-7">
