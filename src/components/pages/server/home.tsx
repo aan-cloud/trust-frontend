@@ -13,7 +13,6 @@ type ProductSchema = z.infer<typeof productSchema>[]
 export const HomePage = async () => {
 
   const data: ProductSchema = await getAllProducts();
-  console.log(data)
   
   return (
     <>
