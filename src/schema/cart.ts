@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { dataSchema } from "./data";
+import { productSchema } from "./data";
 
 const cartItemSchema = z.object({
     id: z.string(),
     productId: z.string(),
     quantity: z.number(),
     cartId: z.string(),
-    product: dataSchema
+    product: productSchema
 })
 
 export const userCartSchema = z.object({

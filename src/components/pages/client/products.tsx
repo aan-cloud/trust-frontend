@@ -21,11 +21,10 @@ import { filterSchema } from '@/schema/data';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState, useEffect } from 'react';
 import { CardProduct } from '../../ui/cardProduct';
-import { dataSchema } from '@/schema/data';
+import { productSchema } from '@/schema/data';
 import { toast } from 'sonner';
-// import { useRouter } from 'next/navigation';
 
-type ProductSchema = z.infer<typeof dataSchema>
+type ProductSchema = z.infer<typeof productSchema>
 
 type Filter = {
   name?: { contains: string}
@@ -117,7 +116,7 @@ export const ProductsList = ({ name }: { name: string }) => {
           className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 px-4 flex-grow"
           id="cart"
         >
-          {data.map((product: z.infer<typeof dataSchema>) => (
+          {data.map((product: ProductSchema) => (
             <CardProduct
               key={product.id}
               product={product}
