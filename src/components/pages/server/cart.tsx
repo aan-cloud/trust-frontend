@@ -12,7 +12,7 @@ type UserCartSchema = z.infer<typeof userCartSchema>
 
 export const CartPage = async () => {
     const cookie = await cookies();
-    const accesToken = cookie.get("accesToken");
+    const accesToken = cookie.get("accessToken");
 
     if (!accesToken) {
         redirect("/");

@@ -1,20 +1,23 @@
-'use'
-
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
 import { toast } from "sonner"
 import { refreshAccesToken } from "@/requests/auth"
+import { useAuthContext } from "@/context/authContext"
 import { getUserProfile } from "@/requests/user"
-import type { userProfile } from "@/schema/user"
-import { z } from "zod"
-
-type UserProfile = z.infer<typeof userProfile>
 
 export function useAuth() {
   const router = useRouter()
   const [isAuth, setIsAuth] = useState(false)
-  const [userName, setUserName] = useState("")
+  const [isOpen, setIsOpen] = useState(false);
+  const { setUserName } = useAuthContext();
+  const boxRef = useRef<HTMLDivElement | null>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (boxRef.current && !boxRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
 
   useEffect(() => {
     async function getAccessToken() {
@@ -23,21 +26,17 @@ export function useAuth() {
 
       if (refreshToken) {
           if (!accessToken) {
-            await refreshAccesToken(refreshToken);
+            const refreshUserToken = await refreshAccesToken(refreshToken);
             setIsAuth(true)
-
-            const profile: UserProfile = await getUserProfile(accessToken as string)
-            console.log(profile)
-            setUserName(profile.user.userName)
-
+            setUserName(refreshUserToken.userName);
             router.push("/")
             toast("Relogin success", {
               description: new Date().toISOString().split("T")[0],
               action: { label: "Close", onClick: () => "" },
             });  
           } else {
-            const profile: UserProfile = await getUserProfile(accessToken as string)
-            setUserName(profile.user.userName)
+            const userProfile = await getUserProfile(accessToken);
+            setUserName(userProfile.user.userName);
             setIsAuth(true)
           }
       } else {
@@ -46,7 +45,17 @@ export function useAuth() {
     }
 
     getAccessToken();
-  }, [router])
 
-  return { isAuth, userName }
+    if (isAuth) {
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+        };
+    } else {
+        return;
+    }
+  })
+
+  return { isAuth, boxRef, isOpen, setIsOpen }
 }

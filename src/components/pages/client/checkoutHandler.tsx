@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 export const CheckoutHandler = ({totalPrice}: {totalPrice: number}) => {
     const router = useRouter();
-    const accesToken = Cookies.get("accesToken");
+    const accessToken = Cookies.get("accessToken");
 
     async function handleCheckout() {
         if (totalPrice <= 0) {
@@ -18,7 +18,7 @@ export const CheckoutHandler = ({totalPrice}: {totalPrice: number}) => {
             });
             router.push("/products")
         }
-        const redirectUrl = await checkout(accesToken);
+        const redirectUrl = await checkout(accessToken);
         router.push(redirectUrl);
     }
 

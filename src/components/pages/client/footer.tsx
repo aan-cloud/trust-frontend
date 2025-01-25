@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <section className="flex justify-between px-24 py-14 gap-5 bg-popover-foreground">
+    <section className="sm:flex-row flex flex-col justify-between px-4 sm:px-24 py-14 gap-5 sm:gap-32 bg-popover-foreground">
       <div className="">
         <header>
           <h1 className="font-sans text-4xl font-black uppercase text-primary">
@@ -15,6 +15,7 @@ export const Footer = () => {
           TRUST. &copy; 2024. All Rights Reserved
         </footer>
       </div>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(70px,1fr))] sm:flex sm:justify-between sm:flex-grow gap-1">
       {Array.from({ length: 3 }, (_, index) => index++).map((i) => (
         <ul key={i}>
           <li className="mb-4 text-lxl font-bold font-sans text-stone-400">
@@ -31,6 +32,7 @@ export const Footer = () => {
           </li>
         </ul>
       ))}
+      </div>
     </section>
   );
 };

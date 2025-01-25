@@ -8,7 +8,7 @@ type UserProfile = z.infer<typeof userProfile>
 
 export const UserProfile = async () => {
     const cookie = await cookies();
-    const accesToken = cookie.get("accesToken");
+    const accesToken = cookie.get("accessToken");
     const userInfo: UserProfile = await getUserProfile(accesToken?.value as string);
 
     return (

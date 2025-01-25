@@ -17,6 +17,8 @@ import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { toast } from 'sonner';
+import { useAuthContext } from '@/context/authContext';
 
 interface AuthPageProps {
   page: 'login' | 'register';
@@ -24,6 +26,7 @@ interface AuthPageProps {
 
 export const AuthPage: React.FC<AuthPageProps> = ({ page }) => {
   const router = useRouter();
+  const { setUserName } = useAuthContext();
   const isRegister = page === 'register';
 
   const form = useForm<z.infer<typeof authSchema>>({
@@ -36,16 +39,39 @@ export const AuthPage: React.FC<AuthPageProps> = ({ page }) => {
   });
 
   async function onSubmit(values: z.infer<typeof authSchema>) {
-    await authFetch({
+    const isSuccess = await authFetch({
       username: values.username,
       ...(isRegister ? { email: values.email } : {}),
       password: values.password,
     }, page);
 
     if (isRegister) {
-      router.push("/login")
+      if (!isSuccess) {
+        toast('Registration failed, try again !', {
+          description: new Date().toISOString().split('T')[0],
+          action: { label: 'Close', onClick: () => '' },
+        });
+      } else {
+        toast('Register Success', {
+          description: new Date().toISOString().split('T')[0],
+          action: { label: 'Close', onClick: () => '' },
+        });
+        router.push("/login")
+      }
     } else {
-      router.push("/")
+      if (!isSuccess) {
+        toast('Password or UserName Incorrect', {
+          description: new Date().toISOString().split('T')[0],
+          action: { label: 'Close', onClick: () => '' },
+        });
+      } else {
+        setUserName(isSuccess.userName);
+        toast('Login success', {
+          description: new Date().toISOString().split('T')[0],
+          action: { label: 'Close', onClick: () => '' },
+        });
+        router.push("/")
+      }
     }
   }
 

@@ -11,20 +11,36 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigations } from '../../../../data';
-import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserCart } from '@/components/ui/userCard';
 import { useAuth } from '@/hooks/use-auth';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useAuthContext } from '@/context/authContext';
+import { useState, useEffect } from 'react';
 
 export const Header = () => {
 
+  const { userName } = useAuthContext();
+  const [isOpenNav, setIsOpenNav] = useState(false);
   const router = useRouter();
-  const {isAuth, userName} = useAuth();
-  const [isOpen, setIsOpen] = useState(false);
-  const boxRef = useRef<HTMLDivElement | null>(null);
-
+  const {isAuth, boxRef, isOpen, setIsOpen} = useAuth();
   const pathName = usePathname();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        setIsOpenNav(true);
+      } else {
+        setIsOpenNav(false);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
@@ -39,25 +55,35 @@ export const Header = () => {
     router.push(`/products?${queryString}`)
   };
 
-  // const handleClickOutside = (event: MouseEvent) => {
-  //   if (boxRef.current && !boxRef.current.contains(event.target as Node)) {
-  //     setIsOpen(false);
-  //   }
-  // };
+  const handleNavLinkClick = () => {
+    if (window.innerWidth < 640) { // 640px adalah breakpoint sm di Tailwind
+      setIsOpenNav(false); // Tutup isOpenNav hanya pada layar kecil
+    }
+  };
 
   return (
-    <header className="sticky top-0 bg-white bg-opacity-30 backdrop-blur-sm transition-all duration-300 shadow-sm z-10 px-24 p-4 flex justify-between items-center">
+    <header className="sticky bg-white bg-opacity-30 backdrop-blur-sm transition-all duration-300 top-0 shadow-sm z-10 px-4 sm:px-24 p-4 flex justify-between items-center">
       <Link
         href={'/'}
+        onClick={handleNavLinkClick}
         className="font-sans text-4xl font-black uppercase text-primary"
       >
         trust.
       </Link>
-      <NavLinks />
+      <svg onClick={() => setIsOpenNav(!isOpenNav)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 sm:hidden">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+      <div className={clsx("w-screen h-screen sm:h-fit fixed justify-end sm:static top-14 bg-muted right-0 z-50 shadow-xl flex flex-col-reverse gap-4 py-5 sm:py-0 sm:w-fit sm:flex-row sm:flex-grow sm:shadow-none sm:items-center sm:bg-transparent sm:transition-all sm:duration-300 sm:justify-between",
+        {
+          'flex': isOpenNav,
+          'hidden': !isOpenNav
+        }
+      )} id="nav">
+      <NavLinks isOpenNav handleNavLinkClick={handleNavLinkClick}/>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-x-4 flex justify-between w-[40%]"
+          className="sm:space-x-4 px-4 flex justify-between sm:w-[45%]"
         >
           <FormField
             control={form.control}
@@ -76,7 +102,7 @@ export const Header = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">
+          <Button type="submit" onClick={handleNavLinkClick}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -95,13 +121,13 @@ export const Header = () => {
         </form>
       </Form>
       <div
-        className="flex gap-8  items-center"
+        className="flex flex-row-reverse sm:flex-grow sm:flex-row px-4 sm:mt-0 sm:px-0 justify-between items-center"
         id="logo"
       >
         {
           isAuth ? (
             <>
-              <Link href={"/wishList"}>
+              <Link href={"/wishList"} onClick={handleNavLinkClick}>
               <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -117,7 +143,7 @@ export const Header = () => {
           />
         </svg>
               </Link>
-        <Link href={"/cart"}>
+        <Link href={"/cart"} onClick={handleNavLinkClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -142,7 +168,7 @@ export const Header = () => {
               <h2 className='font-sans'>Hi,</h2> 
               <h2 className='font-semibold font-sans'>{userName}</h2>
             </div>
-            <UserCart isOpen={isOpen} ref={boxRef}/>
+            <UserCart isOpen={isOpen} handleNavLinkClick={handleNavLinkClick} ref={boxRef}/>
         </div>
             </>
           ) : (
@@ -160,21 +186,29 @@ export const Header = () => {
           )
         }
       </div>
+      </div>
     </header>
   );
 };
 
-const NavLinks = () => {
+const NavLinks = ({ isOpenNav, handleNavLinkClick }: {isOpenNav: boolean, handleNavLinkClick: () => void}) => {
   const pathName = usePathname();
 
   return (
-    <div className="flex gap-2 font-sans font-medium">
+    <div className={clsx("flex flex-col sm:flex-row gap-2 justify-between px-4 font-sans font-medium",
+      {
+        'hidden': !isOpenNav, // Sembunyikan navigasi pada layar kecil jika isOpenNav false
+        'flex': isOpenNav, // Tampilkan navigasi pada layar kecil jika isOpenNav true
+      }
+    )}   
+    >
       {navigations.map((link) => (
         <Link
+          onClick={handleNavLinkClick}
           key={link.name}
           href={link.href}
           className={clsx(
-            'hover:bg-primary rounded-sm hover:text-white py-2 px-2 font-poppins',
+            'hover:bg-primary w-full sm:w-fit rounded-sm hover:text-white py-2 px-2 font-poppins',
             {
               'bg-primary text-white': pathName === link.href,
             }

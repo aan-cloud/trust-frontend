@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import { z } from 'zod';
-import { dataSchema } from '@/schema/data';
+import { productSchema } from '@/schema/data';
 import Link from 'next/link';
 
 export const CardProduct = ({
   product,
 }: {
-  product: z.infer<typeof dataSchema>;
+  product: z.infer<typeof productSchema>;
 }) => {
   return (
     <Link

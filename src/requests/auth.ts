@@ -18,20 +18,20 @@ export const authFetch = async (userData: z.infer<typeof authSchema>, page: stri
       });
 
       if(!response.ok) {
-        throw new Error(`Data incorrect! ${response.statusText}`)
+        return null
       }
       
       const userAuthData: z.infer<typeof loginResponseSchema> = await response.json();
       console.log(userAuthData)
 
-      const token = Cookies.get("accesToken");
+      const token = Cookies.get("accessToken");
 
       if (!token && page === "login") {
-        Cookies.set("accesToken", userAuthData.accesToken, { expires: 15/1400, path: ""})
+        Cookies.set("accessToken", userAuthData.accesToken, { expires: 15/1400, path: ""})
         Cookies.set("refreshToken", userAuthData.refreshToken, { expires: 14, path: ""})
       }
 
-      return page
+      return userAuthData;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: Error | any) {
@@ -60,6 +60,8 @@ export const refreshAccesToken = async (refreshToken: string) => {
     Cookies.set("accessToken", userAuthData.accesToken, { expires: 15/1400, path: ""})
     Cookies.set("refreshToken", userAuthData.refreshToken, { expires: 14, path: ""})
 
+    return userAuthData;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: Error | any) {
     throw new Error(`${error.message}`)
@@ -85,7 +87,7 @@ export const logOut = async (accesToken: string | undefined, refreshToken: strin
     
     const userAuthData: z.infer<typeof logOutSchema> = await response.json();
 
-    Cookies.remove("accesToken");
+    Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
 
     return userAuthData;

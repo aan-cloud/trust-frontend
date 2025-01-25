@@ -17,9 +17,9 @@ export const HomePage = async () => {
   
   return (
     <>
-      <section className="flex justify-between px-24 py-5">
+      <section className="sm:flex-row flex flex-col sm justify-between px-4 py-5 sm:px-24">
         <div className="flex flex-col gap-6">
-          <h1 className="pt-10 font-sans font-black text-6xl select-none">
+          <h1 className="sm:pt-10 pt-3 font-sans font-black text-3xl sm:text-6xl select-none">
             MAKE YOUR CAR BEAUTIFUL AND MORE HEALTHY
           </h1>
           <p className="font-poppins select-none">
@@ -32,7 +32,7 @@ export const HomePage = async () => {
           >
             Shop now
           </Link>
-          <ul className="mt-4 flex justify-start gap-6">
+          <ul className="mt-4 flex justify-start sm:gap-6">
             <li className="pr-7 font-poppins">
               <h3 className="text-2xl font-semibold">200+</h3>
               <small>Customer</small>
@@ -48,22 +48,22 @@ export const HomePage = async () => {
           </ul>
         </div>
         <div
-          className="flex items-center justify-center w-full"
+          className="sm:flex hidden items-center justify-center w-full"
           id="illustration"
         >
           <Image
             src="https://ucarecdn.com/a6a7b57f-f479-4f15-9c41-5fd1050674d7/trusthomeimageremovebgpreview.png"
             alt="Ilustration automotive engineer"
-            width={550}
-            height={550}
+            width={460}
+            height={460}
           />
         </div>
       </section>
       <section
-        className="px-24 py-4 flex text-white justify-between bg-black"
+        className="grid sm:px-24 grid-cols-[repeat(auto-fill,minmax(70px,1fr))] sm:flex sm:justify-between sm:items-center gap-1 p-4 bg-black"
         id="partner"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
           <Image
             src={
               'https://ucarecdn.com/80997a9b-8b5f-4f4f-b4f8-bf7a30e9ffe9/perodua.webp'
@@ -72,9 +72,9 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-2xl font-sans font-bold">Perodua</h1>
+          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Perodua</h1>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
           <Image
             src={
               'https://ucarecdn.com/667207de-b722-4d1c-9096-f3a324cde916/protonsparepartssupplierinMalaysia.webp'
@@ -83,9 +83,9 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-2xl font-sans font-bold">Toyota</h1>
+          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Toyota</h1>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
           <Image
             src={
               'https://ucarecdn.com/a27ffd9a-76a7-4363-83db-cc70d91d6da2/HondasparepartssupplierinMalaysia.webp'
@@ -94,20 +94,20 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-2xl font-sans font-bold">Honda</h1>
+          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Honda</h1>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
           <Image
             src={
               'https://ucarecdn.com/d978a410-f006-4652-a07d-4b113493acef/mitsubishisparepartssupplierinMalaysia.webp'
             }
-            alt="Mitsubitsi"
+            alt="Mitsubishi"
             width={50}
             height={50}
           />
-          <h1 className="text-2xl font-sans font-bold">Mistsubitsi</h1>
+          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Mitsubishi</h1>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
           <Image
             src={
               'https://ucarecdn.com/d382d922-cbab-4276-b342-3eb2fffcc0dd/toyota.webp'
@@ -116,7 +116,7 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-2xl font-sans font-bold">Toyota</h1>
+          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Toyota</h1>
         </div>
       </section>
       <ProductHighlight
@@ -129,7 +129,7 @@ export const HomePage = async () => {
       />
       <Comment
         userName="Farhan"
-        message="Excellent service and top-notch quality! The parts I ordered fit perfectly, and the delivery was faster than expected. The prices are reasonable, and the customer support team was very responsive and helpful. The entire process was smooth, and I’m genuinely impressed with the professionalism. I will definitely be using this platform for future purchases!"
+        message="Excellent service and top-notch quality! The parts I ordered fit perfectly, and the delivery was faster than expected. The prices are reasonable, and the customer support team was very responsive and helpful."
       />
     </>
   );
@@ -144,12 +144,12 @@ const ProductHighlight = ({
 }) => {
   return (
     <section
-      className="px-24 py-12 flex flex-col gap-10 bg-white border border-muted"
+      className="px-4 sm:px-24 py-12 flex flex-col gap-10 bg-white border border-muted"
       id="new"
     >
-      <h1 className="text-4xl font-black font-inte text-center">{section}</h1>
+      <h1 className="sm:text-4xl text-lg font-black font-inte text-center">{section}</h1>
       <div
-        className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 p-4"
+        className="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6 sm:gap-4 p-4"
         id="cart"
       >
         {data.map((product: z.infer<typeof productSchema>) => (
@@ -179,13 +179,13 @@ const Comment = ({
 }) => {
   return (
     <section className="bg-white py-12">
-      <h1 className="px-24 pt-8 text-4xl font-black font-inte text-start">
+      <h1 className="px-4 sm:px-24 pt-8 text-xl sm:text-4xl font-black font-inte text-start">
         OUR HAPPY CUSTOMER
       </h1>
-      <div className="flex  justify-between px-24 py-8">
+      <div className="sm:flex-row flex flex-col px-4 sm:px-24 py-8 gap-4">
         {Array.from({ length: 3 }, (_, index) => index++).map((i) => (
           <Card
-            className="max-w-[31%] min-h-44 hover:border hover:border-primary hover:cursor-pointer"
+            className="sm:max-w-[31%] hover:border hover:border-primary hover:cursor-pointer"
             key={i}
           >
             <CardHeader>

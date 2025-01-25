@@ -24,8 +24,8 @@ export const ProductDetails = async ({
   return (
     <section className="flex flex-col gap-5 px-24 py-5">
       <DynamicBreadcrumbs />
-      <div className="py-3 flex gap-24">
-        <Carousel>
+      <div className="py-3 flex justify-between gap-10">
+        <Carousel className='w-[45%] flex justify-center items-center'>
           <CarouselContent>
             {product.imageUrl.map((picture) => (
               <CarouselItem key={picture.id}>
@@ -34,13 +34,13 @@ export const ProductDetails = async ({
                   alt={picture.id}
                   width={460}
                   height={460}
-                  className="rounded-xl"
+                  className="rounded-xl min-w-[220px]"
                 />
               </CarouselItem>
             ))}
           </CarouselContent>
           <CarouselPrevious className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10" />
-          <CarouselNext className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10" />
+          <CarouselNext className="absolute top-1/2 right-20 transform -translate-y-1/2 z-10" />
         </Carousel>
         <div
           className="flex flex-col justify-between flex-grow"

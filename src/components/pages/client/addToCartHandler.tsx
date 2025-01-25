@@ -27,7 +27,7 @@ export const AddToCartHandler = ({ product } : { product: ProductDetails }) => {
       });
     
       async function onSubmit(values: z.infer<typeof inserToCartSchema>) {
-        const token = Cookies.get("accesToken");
+        const token = Cookies.get("accessToken");
     
         if (!token) {
             toast('Failed add item, trust tring to relogin..', {
