@@ -13,15 +13,16 @@ type ProductSchema = z.infer<typeof productSchema>[]
 export const HomePage = async () => {
 
   const data: ProductSchema = await getAllProducts();
+  console.log(data)
   
   return (
     <>
       <section className="flex justify-between px-24 py-5">
         <div className="flex flex-col gap-6">
-          <h1 className="pt-10 font-sans font-black text-6xl">
+          <h1 className="pt-10 font-sans font-black text-6xl select-none">
             MAKE YOUR CAR BEAUTIFUL AND MORE HEALTHY
           </h1>
-          <p className="font-poppins">
+          <p className="font-poppins select-none">
             Look for the items you want, complete, reliable and original
             products that are trusted by more than 100 users.
           </p>

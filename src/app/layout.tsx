@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${poppin.variable} antialiased bg-muted`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${poppin.variable} antialiased bg-muted flex flex-col min-h-screen`}
       >
         <Header />
         {children}

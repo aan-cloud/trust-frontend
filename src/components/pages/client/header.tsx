@@ -3,7 +3,6 @@
 import { Button } from '../../ui/button';
 import { Form, FormControl, FormField, FormItem } from '../../ui/form';
 import { Input } from '../../ui/input';
-import Cookies from 'js-cookie'
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { searchSchema } from '@/schema/search';
@@ -12,41 +11,18 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigations } from '../../../../data';
-import { useEffect, useState } from 'react';
-import { refreshAccesToken } from '@/requests/auth';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { UserCart } from '@/components/ui/userCard';
+import { useAuth } from '@/hooks/use-auth';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export const Header = () => {
 
   const router = useRouter();
-
-  const [isAuth, setIsAuth] = useState(false);
-
-  useEffect(() => {
-    async function getAccessToken() {
-      const accesToken = Cookies.get("accesToken");
-      const refreshToken = Cookies.get("refreshToken");
-
-      if(refreshToken) {
-        if (!accesToken) {
-          await refreshAccesToken(refreshToken);
-          router.push("/")
-          toast('Relogin succes', {
-            description: new Date().toISOString().split('T')[0],
-            action: { label: 'Close', onClick: () => '' },
-        });
-          setIsAuth(true);
-        } else {
-          setIsAuth(true);
-        }
-      } else {
-        setIsAuth(false)
-      }
-    }
-
-    getAccessToken();
-  })
+  const {isAuth, userName} = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+  const boxRef = useRef<HTMLDivElement | null>(null);
 
   const pathName = usePathname();
 
@@ -61,7 +37,13 @@ export const Header = () => {
     console.log(values);
     const queryString = new URLSearchParams(values).toString();
     router.push(`/products?${queryString}`)
-  }
+  };
+
+  // const handleClickOutside = (event: MouseEvent) => {
+  //   if (boxRef.current && !boxRef.current.contains(event.target as Node)) {
+  //     setIsOpen(false);
+  //   }
+  // };
 
   return (
     <header className="sticky top-0 bg-white bg-opacity-30 backdrop-blur-sm transition-all duration-300 shadow-sm z-10 px-24 p-4 flex justify-between items-center">
@@ -113,7 +95,7 @@ export const Header = () => {
         </form>
       </Form>
       <div
-        className="flex gap-4 ml-28"
+        className="flex gap-8  items-center"
         id="logo"
       >
         {
@@ -151,22 +133,17 @@ export const Header = () => {
           />
         </svg>
         </Link>
-        <Link href={"/user"}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-6 text-primary"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-          />
-        </svg>
-        </Link>
+        <div onClick={() => setIsOpen(!isOpen)} className='cursor-pointer flex gap-2 items-center'>
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <div className='flex items-center gap-1 select-none'>
+              <h2 className='font-sans'>Hi,</h2> 
+              <h2 className='font-semibold font-sans'>{userName}</h2>
+            </div>
+            <UserCart isOpen={isOpen} ref={boxRef}/>
+        </div>
             </>
           ) : (
             <Link
