@@ -1,6 +1,6 @@
 import { DynamicBreadcrumbs } from '../../ui/dynamicBreadcrumbs';
 import { z } from 'zod';
-import { productDetailsSchema } from '@/schema/data';
+import { productDetailsSchema } from '@/schema/product';
 import Image from 'next/image';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {

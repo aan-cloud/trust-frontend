@@ -6,7 +6,7 @@ import { z } from 'zod';
 import 'dotenv/config';
 import Link from 'next/link';
 import { getAllProducts } from '@/requests/products';
-import { productSchema } from '@/schema/data';
+import { productSchema } from '@/schema/product';
 
 type ProductSchema = z.infer<typeof productSchema>[]
 

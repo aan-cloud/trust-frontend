@@ -2,7 +2,7 @@ import { ProductDetails } from '@/components/pages/server/productDetails';
 import 'dotenv/config';
 import { getProductDetails } from '@/requests/products';
 import { z } from 'zod';
-import { productDetailsSchema } from '@/schema/data';
+import { productDetailsSchema } from '@/schema/product';
 
 type ProductDetails = z.infer<typeof productDetailsSchema>
 

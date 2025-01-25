@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { roles } from "./data";
+import { roles } from "./product";
 
 export const loginResponseSchema = z.object({
     userName: z.string(),

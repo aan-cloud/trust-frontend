@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { filterSchema } from '@/schema/data';
+import { filterSchema } from '@/schema/product';
 import { z } from 'zod';
 
 export const getAllProducts = async (filter?: z.infer<typeof filterSchema>) => {

@@ -17,11 +17,11 @@ import {
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { UseFormReturn } from 'react-hook-form';
-import { filterSchema } from '@/schema/data';
+import { filterSchema } from '@/schema/product';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState, useEffect } from 'react';
 import { CardProduct } from '../../ui/cardProduct';
-import { productSchema } from '@/schema/data';
+import { productSchema } from '@/schema/product';
 import { toast } from 'sonner';
 
 type ProductSchema = z.infer<typeof productSchema>

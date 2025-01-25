@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { z } from 'zod';
-import { productSchema } from '@/schema/data';
+import { productSchema } from '@/schema/product';
 import Link from 'next/link';
 
 export const CardProduct = ({

@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { inserToCartSchema } from '@/schema/data';
+import { inserToCartSchema } from '@/schema/product';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import Cookies from 'js-cookie';
@@ -11,7 +11,7 @@ import { addToCart } from '@/requests/cart';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { productDetailsSchema } from '@/schema/data';
+import { productDetailsSchema } from '@/schema/product';
 
 type ProductDetails = z.infer<typeof productDetailsSchema>
 
