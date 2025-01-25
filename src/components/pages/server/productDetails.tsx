@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { convertToTitleCase } from '@/lib/utils';
+import { convertToTitleCase } from '@/lib/string';
 import { AddToCartHandler } from '../client/addToCartHandler';
 
 type ProductDetails = z.infer<typeof productDetailsSchema>
