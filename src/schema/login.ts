@@ -6,4 +6,8 @@ export const loginResponseSchema = z.object({
     accesToken: z.string(),
     refreshToken: z.string(),
     roles: z.array(roles)
-})
+});
+
+export const logOutSchema = z.object({
+    isLogedOUt: z.boolean()
+});

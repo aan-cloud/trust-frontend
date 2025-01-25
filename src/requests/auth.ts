@@ -2,7 +2,7 @@ import { authSchema } from "@/schema/register";
 import { z } from "zod";
 import Cookies from "js-cookie";
 import 'dotenv/config';
-import { loginResponseSchema } from "@/schema/login";
+import { loginResponseSchema, logOutSchema } from "@/schema/login";
 
 export const authFetch = async (userData: z.infer<typeof authSchema>, page: string) => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/${page}`;
@@ -57,8 +57,38 @@ export const refreshAccesToken = async (refreshToken: string) => {
     
     const userAuthData: z.infer<typeof loginResponseSchema> = await response.json();
 
-    Cookies.set("accesToken", userAuthData.accesToken, { expires: 15/1400, path: ""})
+    Cookies.set("accessToken", userAuthData.accesToken, { expires: 15/1400, path: ""})
     Cookies.set("refreshToken", userAuthData.refreshToken, { expires: 14, path: ""})
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: Error | any) {
+    throw new Error(`${error.message}`)
+  }
+}
+
+export const logOut = async (accesToken: string | undefined, refreshToken: string | undefined) => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`;
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accesToken}`,
+      },
+      body: JSON.stringify({ refreshToken })
+    });
+
+    if(!response.ok) {
+      throw new Error(`${response.statusText}`)
+    }
+    
+    const userAuthData: z.infer<typeof logOutSchema> = await response.json();
+
+    Cookies.remove("accesToken");
+    Cookies.remove("refreshToken");
+
+    return userAuthData;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: Error | any) {
