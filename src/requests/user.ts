@@ -1,3 +1,5 @@
+import { userProfile } from "@/schema/user";
+import { z } from "zod";
 
 export const getUserProfile = async (token: string | undefined) => {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -17,12 +19,12 @@ export const getUserProfile = async (token: string | undefined) => {
             throw new Error(`${response.statusText}`)
         }
           
-        const userProfile = await response.json();
+        const userInfo: z.infer<typeof userProfile> = await response.json();
         console.log(userProfile);
       
-        return userProfile;
+        return userInfo;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: Error | any) {
-      console.log(error.message);
+      throw new Error(`Error ${error.message}`)
     }
 }
