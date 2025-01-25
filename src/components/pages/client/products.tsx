@@ -35,6 +35,7 @@ type Filter = {
 export const ProductsList = ({ name }: { name: string }) => {
   const [data, setData] = useState<ProductSchema[]>([])
   const [filter, setFilter] = useState<Filter>({})
+  const [isOpenFilter, setIsopenFilter] = useState(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -104,16 +105,27 @@ export const ProductsList = ({ name }: { name: string }) => {
   }
 
   return (
-    <section className="px-24 py-5 pb-9">
+    <section className="sm:px-24 px-4 py-5 pb-9">
       <DynamicBreadcrumbs />
-      <div className="flex gap-7 mt-8">
+      <div className="flex sm:flex-row flex-col gap-7 mt-8">
+        <Button onClick={() => setIsopenFilter(!isOpenFilter)} className='flex sm:hidden text-base font-normal font-poppins'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+          </svg>
+          {
+           isOpenFilter ?
+           "Close Filter" :
+           "Open Filter"
+          }
+        </Button>
         <Filter
           onSubmit={onSubmit}
           form={form}
           name={name}
+          isOpenFilter={isOpenFilter}
         />
         <div
-          className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 px-4 flex-grow"
+          className="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 ms:px-4 flex-grow"
           id="cart"
         >
           {data.map((product: ProductSchema) => (
@@ -131,17 +143,19 @@ export const ProductsList = ({ name }: { name: string }) => {
 const Filter = ({
   onSubmit,
   form,
-  name
+  name,
+  isOpenFilter
 }: {
   onSubmit: (data: z.infer<typeof filterSchema>) => void;
   form: UseFormReturn<z.infer<typeof filterSchema>>;
   name: string
+  isOpenFilter: boolean
 }) => {
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={name ? "hidden" :"p-5 flex flex-col gap-3 border rounded-md max-h-64"}
+        className={name || !isOpenFilter ? "hidden" :"p-5 flex flex-col gap-5 sm:gap-3 border rounded-md sm:max-h-64"}
       >
         <div className="flex justify-between border-b pb-2">
           <h1 className="font-sans font-semibold">Filters</h1>
