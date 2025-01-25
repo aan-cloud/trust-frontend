@@ -21,17 +21,17 @@ export const CartPage = async () => {
     const userCart: UserCartSchema = await getUserCart(accesToken);
 
     return (
-        <section className="px-24 flex flex-col gap-4 py-5">
+        <section className="sm:px-24 px-4 flex flex-col gap-4 py-5">
             <DynamicBreadcrumbs />
             <h1 className="font-sans font-black text-4xl">
                 MY CART
             </h1>
-            <div className="py-5 flex justify-between ">
-                <div className="min-w-[60%] p-5 flex flex-col gap-3 border rounded-lg">
+            <div className="py-5 flex-col flex gap-4 sm:gap-0 sm:flex-row justify-between ">
+                <div className="sm:min-w-[60%] p-5 flex flex-col gap-3 border rounded-lg">
                     {
                         userCart.items.length > 0 ? 
                         userCart.items.map((item) => (
-                            <div key={item.id} className="flex gap-5 border-b pb-3">
+                            <div key={item.id} className="flex gap-5 border-b pb-3 max-h-fit">
                                 <Image 
                                     src={item.product.imageUrl[0].imageUrl}
                                     alt={item.product.name}
