@@ -173,6 +173,7 @@ export const Header = () => {
             </>
           ) : (
             <Link
+            onClick={handleNavLinkClick}
           href={"/register"}
           className={clsx(
             'hover:bg-primary rounded-sm hover:text-white py-2 px-2 font-poppins',
