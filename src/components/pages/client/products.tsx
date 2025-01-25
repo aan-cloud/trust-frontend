@@ -53,7 +53,7 @@ export const ProductsList = ({ name }: { name: string }) => {
       const filterString = encodeURIComponent(JSON.stringify(newFilter))
 
       const url = `${baseUrl}/products?filter=${filterString}`
-
+      
       try {
         const response = await fetch(url)
 
@@ -82,7 +82,22 @@ export const ProductsList = ({ name }: { name: string }) => {
       }
     }
 
-    fetchData()
+    fetchData();
+
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        setIsopenFilter(true);
+      } else {
+        setIsopenFilter(false);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+
   }, [filter, name])
 
   const form = useForm<z.infer<typeof filterSchema>>({
