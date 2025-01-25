@@ -22,10 +22,10 @@ export const ProductDetails = async ({
 }) => {
 
   return (
-    <section className="flex flex-col gap-5 px-24 py-5">
+    <section className="flex flex-col gap-5 px-4 sm:px-24 py-5">
       <DynamicBreadcrumbs />
-      <div className="py-3 flex justify-between gap-10">
-        <Carousel className='w-[45%] flex justify-center items-center'>
+      <div className="py-3 sm:flex-row flex flex-col sm:justify-between gap-10">
+        <Carousel className='sm:w-[45%] w-full flex justify-center items-center'>
           <CarouselContent>
             {product.imageUrl.map((picture) => (
               <CarouselItem key={picture.id}>
@@ -40,14 +40,14 @@ export const ProductDetails = async ({
             ))}
           </CarouselContent>
           <CarouselPrevious className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10" />
-          <CarouselNext className="absolute top-1/2 right-20 transform -translate-y-1/2 z-10" />
+          <CarouselNext className="absolute top-1/2 right-6 sm:right-20 transform -translate-y-1/2 z-10" />
         </Carousel>
         <div
           className="flex flex-col justify-between flex-grow"
           id="details"
         >
           <div className="flex flex-col gap-5">
-            <h1 className="font-sans font-black text-5xl">{product.name}</h1>
+            <h1 className="font-sans font-black text-2xl sm:text-5xl">{product.name}</h1>
             <div
               className="flex gap-1 items-center"
               id="star"
@@ -71,18 +71,18 @@ export const ProductDetails = async ({
               ))}
               <small className="font-poppins">5/5.0</small>
             </div>
-            <h2 className="mb-4 text-2xl font-bold font-sans text-primary">
+            <h2 className="mb-4 text-xl sm:text-2xl font-bold font-sans text-primary">
               RM {product.price}
             </h2>
             <div className='flex gap-3 items-center'>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-8 fill-primary ">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="sm:size-8 size-6 fill-primary ">
                 <path d="M5.223 2.25c-.497 0-.974.198-1.325.55l-1.3 1.298A3.75 3.75 0 0 0 7.5 9.75c.627.47 1.406.75 2.25.75.844 0 1.624-.28 2.25-.75.626.47 1.406.75 2.25.75.844 0 1.623-.28 2.25-.75a3.75 3.75 0 0 0 4.902-5.652l-1.3-1.299a1.875 1.875 0 0 0-1.325-.549H5.223Z" />
                 <path fillRule="evenodd" d="M3 20.25v-8.755c1.42.674 3.08.673 4.5 0A5.234 5.234 0 0 0 9.75 12c.804 0 1.568-.182 2.25-.506a5.234 5.234 0 0 0 2.25.506c.804 0 1.567-.182 2.25-.506 1.42.674 3.08.675 4.5.001v8.755h.75a.75.75 0 0 1 0 1.5H2.25a.75.75 0 0 1 0-1.5H3Zm3-6a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75v-3Zm8.25-.75a.75.75 0 0 0-.75.75v5.25c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-5.25a.75.75 0 0 0-.75-.75h-3Z" clipRule="evenodd" />
               </svg>
               <h1 className='font-poppins text-xl font-semibold'>{convertToTitleCase(product.user.userName)}</h1>
             </div>
             <div className="flex gap-3 mt-3 items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7 fill-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="sm:size-7 size-5 fill-primary">
                 <path fillRule="evenodd" d="M5.25 2.25a3 3 0 0 0-3 3v4.318a3 3 0 0 0 .879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 0 0 5.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 0 0-2.122-.879H5.25ZM6.375 7.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" clipRule="evenodd" />
               </svg>
               <h1 className='items-center text-xl font-semibold font-poppins '>
@@ -109,7 +109,7 @@ export const ProductDetails = async ({
               Rating & Reviews
             </TabsTrigger>
             <TabsTrigger
-              className="flex-grow font-semibold font-sans data-[state=active]:bg-primary data-[state=active]:text-white"
+              className="hidden sm:block flex-grow font-semibold font-sans data-[state=active]:bg-primary data-[state=active]:text-white"
               value="faqs"
             >
               FAQs

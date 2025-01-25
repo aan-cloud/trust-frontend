@@ -51,7 +51,7 @@ export const AddToCartHandler = ({ product } : { product: ProductDetails }) => {
     return (
         <Form {...form}>
             <form
-              className="flex gap-3"
+              className="flex gap-3 mt-4 sm:mt-0"
               onSubmit={form.handleSubmit(onSubmit)}
             >
               <FormField
