@@ -9,6 +9,7 @@ const userRoles = z.object({
 const user = z.object({
     roles: z.array(userRoles),
     userName: z.string(),
+    avatarUrl: z.string().optional(),
     email: z.string(),
     id: z.string()
 });
