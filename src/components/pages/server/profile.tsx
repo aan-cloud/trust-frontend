@@ -3,23 +3,29 @@ import { cookies } from "next/headers"
 import { userProfile } from "@/schema/user";
 import { z } from "zod";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type UserProfile = z.infer<typeof userProfile>
 
 export const UserProfile = async () => {
+    
     const cookie = await cookies();
     const accesToken = cookie.get("accessToken");
     const userInfo: UserProfile = await getUserProfile(accesToken?.value as string);
 
     return (
         <div className="w-full py-5 flex flex-col gap-1 sm:gap-7">
+            <Link href={"/change-role"}>
+                <Button className={userInfo.user.roles[0].role.roleName !== "SELLER" ? "sm:w-[20%] w-full font-medium text-sans text-white" : "hidden"}>Become a Seller</Button>
+            </Link>
             <div id="image" className="flex flex-col justify-center items-center gap-2 bg-muted py-4">
                 <Image 
                     className="rounded-full"
                     width={80}
                     height={80}
                     alt="Avatar"
-                    src={"https://lumiere-a.akamaihd.net/v1/images/a_avatarpandorapedia_neytiri_16x9_1098_01_0e7d844a.jpeg?region=420%2C0%2C1080%2C1080"}
+                    src={userInfo.user.avatarUrl || "https://github.com/shadcn.png"}
                 />
                 <h1 className="text-lg font-bold font-poppins text-gray-500">@ {userInfo.user.userName}</h1>
             </div>
