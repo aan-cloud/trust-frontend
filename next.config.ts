@@ -9,8 +9,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'lumiere-a.akamaihd.net',
+        hostname: 'github.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'static.vecteezy.com'
+      }
     ],
   },
 };
