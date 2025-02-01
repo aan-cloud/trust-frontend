@@ -33,10 +33,10 @@ export const UserCart: React.FC<ModalProps> = ({ isOpen, ref, handleNavLinkClick
     }
 
   return (
-    <Card ref={ref} className={isOpen ? "w-fit absolute top-16 right-36 sm:top-20 sm:right-24 z-50 shadow-xl" : "hidden"}>
+    <Card ref={ref} className={isOpen ? "w-fit absolute top-16 right-28 sm:top-16 sm:right-24 z-50 shadow-xl" : "hidden"}>
       <CardContent className="p-4">
         <nav className="flex flex-col space-y-2">
-          <Link className="justify-start pl-1 font-semibold font-poppins" href={"/user"} onClick={handleNavLinkClick}>
+          <Link className="justify-start pl-1 font-semibold font-poppins" href={"/profile"} onClick={handleNavLinkClick}>
           <Button variant="ghost" className="justify-star pl-1 font-semibold font-poppins ">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-12">
                 <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
@@ -57,7 +57,7 @@ export const UserCart: React.FC<ModalProps> = ({ isOpen, ref, handleNavLinkClick
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-12">
                 <path fillRule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
             </svg>
-            New Product
+            Create Product
           </Button>
           </Link >
           <Link href={"/"} onClick={() => handleLogout()} className="h-fit font-semibold font-poppins pl-1 justify-start text-red-500 hover:text-red-700 hover:bg-red-100">
