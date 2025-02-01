@@ -60,10 +60,10 @@ export const HomePage = async () => {
         </div>
       </section>
       <section
-        className="grid sm:px-24 grid-cols-[repeat(auto-fill,minmax(70px,1fr))] sm:flex sm:justify-between sm:items-center gap-1 p-4 bg-black"
+        className="grid sm:px-24 grid-cols-[repeat(2,minmax(70px,1fr))] sm:flex sm:justify-between sm:items-center gap-1 p-4 bg-black"
         id="partner"
       >
-        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
+        <div className="flex sm:w-fit sm:gap-4 items-center gap-3">
           <Image
             src={
               'https://ucarecdn.com/80997a9b-8b5f-4f4f-b4f8-bf7a30e9ffe9/perodua.webp'
@@ -72,9 +72,9 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Perodua</h1>
+          <h1 className="font-semibold sm:text-2xl text-white font-sans sm:font-bold">Perodua</h1>
         </div>
-        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
+        <div className="flex sm:w-fit sm:gap-4 items-center gap-3">
           <Image
             src={
               'https://ucarecdn.com/667207de-b722-4d1c-9096-f3a324cde916/protonsparepartssupplierinMalaysia.webp'
@@ -83,9 +83,9 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Toyota</h1>
+          <h1 className="font-semibold sm:text-2xl text-white font-sans sm:font-bold">Toyota</h1>
         </div>
-        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
+        <div className="flex sm:w-fit sm:gap-4 items-center gap-3">
           <Image
             src={
               'https://ucarecdn.com/a27ffd9a-76a7-4363-83db-cc70d91d6da2/HondasparepartssupplierinMalaysia.webp'
@@ -94,9 +94,9 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Honda</h1>
+          <h1 className="font-semibold sm:text-2xl text-white font-sans sm:font-bold">Honda</h1>
         </div>
-        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
+        <div className="flex sm:w-fit sm:gap-4 items-center gap-3">
           <Image
             src={
               'https://ucarecdn.com/d978a410-f006-4652-a07d-4b113493acef/mitsubishisparepartssupplierinMalaysia.webp'
@@ -105,9 +105,9 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Mitsubishi</h1>
+          <h1 className="font-semibold sm:text-2xl text-white font-sans sm:font-bold">Mitsubishi</h1>
         </div>
-        <div className="flex w-6 sm:w-fit sm:gap-4 items-center gap-1">
+        <div className="flex sm:w-fit sm:gap-4 items-center gap-3">
           <Image
             src={
               'https://ucarecdn.com/d382d922-cbab-4276-b342-3eb2fffcc0dd/toyota.webp'
@@ -116,7 +116,7 @@ export const HomePage = async () => {
             width={50}
             height={50}
           />
-          <h1 className="text-sm sm:text-2xl text-white font-sans font-thin sm:font-bold">Toyota</h1>
+          <h1 className="font-semibold sm:text-2xl text-white font-sans sm:font-bold">Toyota</h1>
         </div>
       </section>
       <ProductHighlight
