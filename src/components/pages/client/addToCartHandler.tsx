@@ -30,7 +30,7 @@ export const AddToCartHandler = ({ product } : { product: ProductDetails }) => {
         const token = Cookies.get("accessToken");
     
         if (!token) {
-            toast('Failed add item, trust tring to relogin..', {
+            toast('Failed add item, please login first', {
                 description: new Date().toISOString().split('T')[0],
                 action: { label: 'Close', onClick: () => '' },
             });
@@ -42,8 +42,8 @@ export const AddToCartHandler = ({ product } : { product: ProductDetails }) => {
           action: { label: 'Close', onClick: () => '' },
         });
     
-        await addToCart(product.id, token, values.quantity)
-    
+        const productToCart = await addToCart(product.id, token, values.quantity)
+        console.log(productToCart)
     
         router.push("/cart")
       }
