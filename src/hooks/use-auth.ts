@@ -10,7 +10,7 @@ export function useAuth() {
   const router = useRouter()
   const [isAuth, setIsAuth] = useState(false)
   const [isOpen, setIsOpen] = useState(false);
-  const { setUserName } = useAuthContext();
+  const { setUserName, setUserId } = useAuthContext();
   const boxRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -37,6 +37,7 @@ export function useAuth() {
           } else {
             const userProfile = await getUserProfile(accessToken);
             setUserName(userProfile.user.userName);
+            setUserId(userProfile.user.id);
             setIsAuth(true)
           }
       } else {
