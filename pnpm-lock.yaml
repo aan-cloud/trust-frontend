@@ -56,6 +56,9 @@ importers:
       '@uploadcare/file-uploader':
         specifier: ^1.13.0
         version: 1.13.0
+      '@uploadcare/react-uploader':
+        specifier: ^1.4.0
+        version: 1.4.0(@types/react@19.0.2)(next@15.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1075,6 +1078,17 @@ packages:
 
   '@uploadcare/image-shrink@6.14.2':
     resolution: {integrity: sha512-q+lUz4MhuDY0pTyLJ6EnTc/+LpQNfVf00qI9ey8SEWnydMb+/v+4O/86Y+IieG5Akbx37Zm0ZolOHLobYdN3Fg==}
+
+  '@uploadcare/react-adapter@0.3.0':
+    resolution: {integrity: sha512-XQLPAERn47XC9srFH3HeQpywyInSaJ6JFDKD5XNvaSL5y2KF3MZerwMHsc/brAOLDQox7lLjzPXzrwlWlcMVqw==}
+    peerDependencies:
+      '@types/react': 17 || 18
+
+  '@uploadcare/react-uploader@1.4.0':
+    resolution: {integrity: sha512-xyut6EyA8dTziP2+J9uvTXvR8MMyblGNx71W+ttQglIBq37yoJSn2J60Jl5z1kkfnwQM13LxgJWsUmbVT5BT5A==}
+    peerDependencies:
+      '@types/react': 17 || 18 || 19
+      next: 13 || 14 || 15
 
   '@uploadcare/upload-client@6.14.2':
     resolution: {integrity: sha512-SCdr6Ed9m1mgKm0DBzZGz1XkA0MK7VZk5I+JAAa/IumfM3SdBfogbhgGBSp0mawTMIGKtDtBADMUsrCoaqtrUg==}
@@ -3529,6 +3543,20 @@ snapshots:
       - utf-8-validate
 
   '@uploadcare/image-shrink@6.14.2': {}
+
+  '@uploadcare/react-adapter@0.3.0(@types/react@19.0.2)':
+    dependencies:
+      '@types/react': 19.0.2
+
+  '@uploadcare/react-uploader@1.4.0(@types/react@19.0.2)(next@15.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+    dependencies:
+      '@types/react': 19.0.2
+      '@uploadcare/file-uploader': 1.13.0
+      '@uploadcare/react-adapter': 0.3.0(@types/react@19.0.2)
+      next: 15.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   '@uploadcare/upload-client@6.14.2':
     dependencies:
