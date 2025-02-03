@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { filterSchema } from '@/schema/product';
+import { filterSchema, newProductSchema, productSchema } from '@/schema/product';
 import { z } from 'zod';
 
 export const getAllProducts = async (filter?: z.infer<typeof filterSchema>) => {
@@ -22,7 +22,7 @@ export const getAllProducts = async (filter?: z.infer<typeof filterSchema>) => {
         throw new Error(`Response status: ${response.status}`);
       }
 
-      const products = await response.json();
+      const products: z.infer<typeof productSchema>[] = await response.json();
 
       return products;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,4 +49,31 @@ export const getProductDetails = async (slug: string) => {
     } catch (error: Error | any) {
       console.log(error.message);
     }
+}
+
+export const createNewProduct = async (newProductData: z.infer<typeof newProductSchema>, token: string | undefined ) => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/products/create`;
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ...newProductData })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const productDetails = await response.json();
+
+    return productDetails;
+    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: Error | any) {
+    console.log(error.message);
+  }
 }
