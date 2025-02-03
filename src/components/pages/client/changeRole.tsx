@@ -57,7 +57,7 @@ export const ChangeRole = () => {
                 action: { label: 'Close', onClick: () => '' },
             });
 
-            router.push("/profile");
+            router.push("/");
         }
     };
     
