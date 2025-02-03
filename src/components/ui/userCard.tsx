@@ -8,6 +8,8 @@ import { toast } from "sonner"
 import Link from "next/link"
 import { Button } from "./button"
 import { useAuthContext } from "@/context/authContext"
+import { useEffect, useState } from "react"
+import { getUserProfile } from "@/requests/user"
 
 type ModalProps = {
     ref: React.RefObject<HTMLDivElement | null>;
@@ -21,7 +23,19 @@ export const UserCart: React.FC<ModalProps> = ({ isOpen, ref, handleNavLinkClick
     const accesToken = Cookies.get("accessToken");
     const refrehToken = Cookies.get("refreshToken");
     const { userId } = useAuthContext();
+    const [userRole, setUserRole] = useState("")
 
+    useEffect(() => {
+      async function fetchUserProfile() {
+        const userProfile = await getUserProfile(accesToken);
+
+        if (userProfile) {
+          setUserRole(userProfile.user.roles[0].role.roleName)
+        }
+      }
+
+      fetchUserProfile();
+    })
 
     async function handleLogout() {
         await logOut(accesToken, refrehToken);
@@ -46,7 +60,7 @@ export const UserCart: React.FC<ModalProps> = ({ isOpen, ref, handleNavLinkClick
             Profile
           </Button>
           </Link >
-          <Link  href={`/${userId}/dashboard`}>
+          <Link className={userRole === 'SELLER' ? 'block' : 'hidden'} onClick={handleNavLinkClick}  href={`/${userId}/dashboard`}>
           <Button variant="ghost" className="w-full justify-start pl-1 font-semibold font-poppins ">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-12">
                 <path fillRule="evenodd" d="M1.5 7.125c0-1.036.84-1.875 1.875-1.875h6c1.036 0 1.875.84 1.875 1.875v3.75c0 1.036-.84 1.875-1.875 1.875h-6A1.875 1.875 0 0 1 1.5 10.875v-3.75Zm12 1.5c0-1.036.84-1.875 1.875-1.875h5.25c1.035 0 1.875.84 1.875 1.875v8.25c0 1.035-.84 1.875-1.875 1.875h-5.25a1.875 1.875 0 0 1-1.875-1.875v-8.25ZM3 16.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875v2.25c0 1.035-.84 1.875-1.875 1.875h-5.25A1.875 1.875 0 0 1 3 18.375v-2.25Z" clipRule="evenodd" />
@@ -54,7 +68,7 @@ export const UserCart: React.FC<ModalProps> = ({ isOpen, ref, handleNavLinkClick
             Dashboard
           </Button>
           </Link >
-          <Link href={`/${userId}/new-product`} className="w-full justify-start pl-1 font-semibold font-poppins ">
+          <Link className={userRole === 'SELLER' ? 'block w-full justify-start pl-1 font-semibold font-poppins' : 'hidden'} onClick={handleNavLinkClick} href={`/${userId}/new-product`}>
           <Button variant="ghost" className="justify-start pl-1 font-semibold font-poppins ">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-12">
                 <path fillRule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
