@@ -16,7 +16,7 @@ export const UserProfile = async () => {
 
     return (
         <div className="w-full py-5 flex flex-col gap-1 sm:gap-7">
-            <Link href={"/profile/change-role"}>
+            <Link href={`/${userInfo.user.id}/change-role`}>
                 <Button className={userInfo.user.roles[0].role.roleName !== "SELLER" ? "sm:w-[20%] w-full font-medium text-sans text-white" : "hidden"}>Become a Seller</Button>
             </Link>
             <div id="image" className="flex flex-col justify-center items-center gap-2 bg-muted py-4">
