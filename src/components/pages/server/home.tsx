@@ -8,12 +8,15 @@ import Link from 'next/link';
 import { getAllProducts } from '@/requests/products';
 import { productSchema } from '@/schema/product';
 
-type ProductSchema = z.infer<typeof productSchema>[]
+type ProductSchema = z.infer<typeof productSchema>[] | undefined
 
 export const HomePage = async () => {
 
-  const data: ProductSchema = await getAllProducts();
-  console.log(data)
+  const filter = {
+    publish: true,
+  };
+
+  const data: ProductSchema = await getAllProducts(filter);
   
   return (
     <>
@@ -152,12 +155,15 @@ const ProductHighlight = ({
         className="grid grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-6 sm:gap-4 p-4"
         id="cart"
       >
-        {data.map((product: z.infer<typeof productSchema>) => (
-          <CardProduct
-            key={product.id}
-            product={product}
-          />
-        ))}
+        { data ?
+          data.map((product: z.infer<typeof productSchema>) => (
+            <CardProduct
+              key={product.id}
+              product={product}
+            />
+          )) :
+          <div>No product</div>
+        }
       </div>
       <div className="flex justify-center">
         <button className="px-8 py-2 text-sm border font-poppins border-muted rounded-2xl hover:bg-muted">
