@@ -59,10 +59,49 @@ export const breadcrumbSchema = z.object({
 });
 
 export const filterSchema = z.object({
-  price: z.number(),
-  category: z.string(),
+  price: z.object({
+    lt: z.number().optional()
+  }).nullable().optional(),
+  category: z.object({
+    name: z.string().optional()
+  }).nullable().optional(),
+  publish: z.boolean()
 });
+
+export const formFilterSchema = z.object({
+  price: z.number().optional(),
+  category: z.string().optional(),
+  // publish: z.boolean()
+})
 
 export const inserToCartSchema = z.object({
   quantity: z.number(),
 });
+
+const images = z.object({
+  imageUrl: z.string()
+})
+
+export const newProductSchema = z.object({
+  name: z.string().min(5, 'Minimum 5 character!'),
+  imageUrl: z.array(images),
+  description:z.string().min(20, 'Minimun 20 Character!'),
+  price: z.number(),
+  stock: z.number(),
+  category: z.enum(["tire", "brake", "steering", "lamp", "gearbox"]),
+});
+
+export const productDashboardSchema = z.object({
+  categoryId: z.string(),
+  description: z.string(),
+  imageUrl: z.array(images),
+  id: z.string(),
+  name: z.string(),
+  price: z.number(),
+  publish: z.boolean(),
+  slug: z.string(),
+  stock: z.number(),
+  userId: z.string(),
+});
+
+export const allProductInDashboard = z.array(productDashboardSchema);
