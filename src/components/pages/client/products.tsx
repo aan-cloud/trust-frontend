@@ -91,7 +91,7 @@ export const ProductsList = ({ name }: { name: string }) => {
   const form = useForm<z.infer<typeof formFilterSchema>>({
     resolver: zodResolver(formFilterSchema),
     defaultValues: {
-      category: "all",
+      category: "",
       price: 200,
     },
   })
@@ -215,10 +215,9 @@ const Filter = ({
                   value={field.value}
                 >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Category" />
+                    <SelectValue placeholder="Select Category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Categories</SelectItem>
                     <SelectItem value="steering">Steering</SelectItem>
                     <SelectItem value="tire">Tire</SelectItem>
                     <SelectItem value="brake">Brake</SelectItem>
