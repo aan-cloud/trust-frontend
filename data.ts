@@ -5,7 +5,7 @@ export const navigations = [
   },
   {
     name: 'Seller',
-    href: '/seller',
+    href: '/sellers',
   },
 ];
 
