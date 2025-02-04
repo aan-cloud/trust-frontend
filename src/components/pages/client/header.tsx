@@ -83,7 +83,7 @@ export const Header = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="sm:space-x-4 px-4 flex justify-between sm:w-[45%]"
+          className="sm:space-x-4 px-4 flex justify-between sm:w-[55%]"
         >
           <FormField
             control={form.control}
