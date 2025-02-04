@@ -7,10 +7,6 @@ export const navigations = [
     name: 'Seller',
     href: '/seller',
   },
-  {
-    name: 'Menu',
-    href: '/menu',
-  },
 ];
 
 export const breadcrumbData = [
