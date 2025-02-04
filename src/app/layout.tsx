@@ -32,7 +32,9 @@ export const metadata: Metadata = {
   description: 'Trusted buying and selling of 100% original spare parts.',
   icons: {
     icon: "/favicon.ico",
+    apple: "/public/apple-touch-icon.png",
   },
+  manifest: "/site.webmanifest"
 };
 
 export default function RootLayout({
